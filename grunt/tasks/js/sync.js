@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 					src: ['**/*.js'],
 					dest: '<%= activeTheme.public.assetPaths.js %>'
 				}],
-				updateAndDelete:true,
+				updateAndDelete:false,
 				verbose: true
 			},
 			js_export_raw: {
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 					src: ['**/*.js'],
 					dest: '<%= activeTheme.export.assetPaths.js %>'
 				}],
-				updateAndDelete:true,
+				updateAndDelete:false,
 				verbose: true
 			},
 			js_build_jspm_bundled: {
@@ -32,12 +32,13 @@ module.exports = function(grunt) {
 				  	path.normalize("polyfills/picturefill.js"),
 					path.normalize('**/*-bundle.js'),
 					path.normalize("jspm_packages/system.js"),
-		            path.normalize("jspm_packages/system-polyfills.js")
+		            path.normalize("jspm_packages/system-polyfills.js"),
+			        path.normalize("jspm_packages/npm/babel-core*/external-helpers.js")
 				  ],
 				  dest: '<%= activeTheme.public.assetPaths.js %>'
 				}],
 				ignoreInDest: path.normalize('**/*-bundle-*.js'),
-				updateAndDelete:true,
+				updateAndDelete:false,
 				verbose: true
 			},
 			js_build_jspm_bundled_sfx: {
@@ -49,7 +50,7 @@ module.exports = function(grunt) {
 				  ],
 				  dest: '<%= activeTheme.public.assetPaths.js %>'
 				}],
-				updateAndDelete:true,
+				updateAndDelete:false,
 				verbose: true,
 				compareUsing: "md5"
 			},
@@ -64,7 +65,7 @@ module.exports = function(grunt) {
 				  dest: '<%= activeTheme.public.assetPaths.js %>'
 				}],
 				ignoreInDest: path.normalize('**/*-bundle-*.js'),
-				updateAndDelete:true,
+				updateAndDelete:false,
 				verbose: true
 			},
 			js_export_jspm_bundled: {
@@ -75,13 +76,14 @@ module.exports = function(grunt) {
 					  	path.normalize("polyfills/picturefill.js"),
 						path.normalize('**/*-bundle.js'),
 						path.normalize("jspm_packages/system.js"),
-			            path.normalize("jspm_packages/system-polyfills.js")
+			            path.normalize("jspm_packages/system-polyfills.js"),
+			            path.normalize("jspm_packages/npm/babel-core*/external-helpers.js")
 					  ],
 					  dest: '<%= activeTheme.export.assetPaths.js %>'
 					}
 					
 				],
-				updateAndDelete:true,
+				updateAndDelete:false,
 				verbose: true
 			},
 			js_export_jspm_bundled_sfx: {
@@ -95,7 +97,7 @@ module.exports = function(grunt) {
 					  dest: '<%= activeTheme.export.assetPaths.js %>'
 					}
 				],
-				updateAndDelete:true,
+				updateAndDelete:false,
 				verbose: true
 			}
 		}

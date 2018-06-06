@@ -14,7 +14,8 @@ module.exports = function(grunt) {
 			theme.basePath = themeName;
 
 		dirs.forEach(function(dir) {
-			theme[dir] = configureThemeDir(theme[dir], themeDefaults[dir], theme.basePath);
+			let canAssetPathBeEmpty = (dir != 'source');
+			theme[dir] = configureThemeDir(theme[dir], themeDefaults[dir], theme.basePath, canAssetPathBeEmpty);
 		});
 
 		theme.css = Object.assign({}, themeDefaults.css, theme.css);
@@ -24,20 +25,24 @@ module.exports = function(grunt) {
 		theme.listen = Object.assign({}, themeDefaults.listen, theme.listen);
 	}
 
-	function configureThemeDir(themeDir, defaultDir, themeBasePath) {
+	function configureThemeDir(themeDir, defaultDir, themeBasePath, canAssetPathBeEmpty) {
 		if(typeof themeDir === 'undefined') {
 			themeDir = {};
-		}
+		} 
 
 		var mergedDir = Object.assign({}, defaultDir, themeDir);
 		mergedDir.assetPaths = Object.assign({}, defaultDir.assetPaths, themeDir.assetPaths);
 		mergedDir.assetUrls = Object.assign({}, defaultDir.assetUrls, themeDir.assetUrls);
-		var basePath = mergedDir.basePath ? path.join(themeBasePath, mergedDir.basePath) : themeBasePath;
-
+		mergedDir.basePath = mergedDir.basePath ? path.join(themeBasePath, mergedDir.basePath) : themeBasePath;
+		
 		for(var assetPath in mergedDir.assetPaths) {
-			mergedDir.assetPaths[assetPath] = path.join(basePath, mergedDir.assetPaths[assetPath]);
+			if(mergedDir.assetPaths[assetPath] || canAssetPathBeEmpty) {
+				mergedDir.assetPaths[assetPath] = path.join(mergedDir.basePath, mergedDir.assetPaths[assetPath]);
+			} else {
+				delete mergedDir.assetPaths[assetPath];
+			}
 		}
-
+		
 		return mergedDir;
 	}
 

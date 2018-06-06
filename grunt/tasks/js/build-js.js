@@ -1,29 +1,14 @@
 module.exports = function(grunt) {
 
-	grunt.registerMultiTask('build-js', function() {
-		grunt.config('activeTheme', this.data);
-		var activeTheme = grunt.config('activeTheme');
+    grunt.registerMultiTask('build-js', function() {
+        grunt.config('activeTheme', this.data);
+        var activeTheme = grunt.config('activeTheme');
 
+        if(activeTheme.source.assetPaths.js && activeTheme.public.assetPaths.js) {
 
-		if(typeof grunt.option('minifyJS') === 'undefined' && (activeTheme.js.minify == 'all' || activeTheme.js.minify == 'build')) {
-			grunt.option('minifyJS', true);
-		}
-		
-		switch(activeTheme.js.processor) {
-			case "none":
-				runRawTasks();
-				break;
-			case "jspm":
-				var jspmTaskRunner = require('./jspm-tasks-runner')(grunt, activeTheme, 'build');
-				jspmTaskRunner.runTasks();
-				break;
-		}
-	});
+            require('./lint-task-runner')(grunt, activeTheme.js.linter, 'build').runTasks();
+            require('./processor-runner')(grunt, activeTheme, 'build').run();  
+        }
+    });
 
-	function runRawTasks() {
-		grunt.task.run('sync:js_build_raw');
-		if(grunt.option('minifyJS')) {
-			grunt.task.run('uglify:js_build_raw');
-		}
-	}
 }

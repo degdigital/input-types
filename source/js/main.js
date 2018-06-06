@@ -1,15 +1,10 @@
-import react from "react";
-import reactDom from "react-dom";
-import redux from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from 'components/app.js';
 
-let app = function() {
+const rootEl = document.getElementById('root');
 
-	function init() {
-		console.log('init');
-	};
-
-	init();
-
-};
-
-export default app();
+ReactDOM.render(
+	<App />,
+	rootEl
+);

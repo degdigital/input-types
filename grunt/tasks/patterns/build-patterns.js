@@ -4,11 +4,13 @@ module.exports = function(grunt) {
 		grunt.config('activeTheme', this.data);
 		var activeTheme = grunt.config('activeTheme');
 
-		let plConfig = getPatternConfig(activeTheme);
+		if(activeTheme.source.assetPaths.patterns && activeTheme.public.assetPaths.patterns) {
+			let plConfig = getPatternConfig(activeTheme);
 
-		buildPatterns(activeTheme, plConfig);
-		
-		copyStyleguideAssets(activeTheme, plConfig);
+			buildPatterns(activeTheme, plConfig);
+
+			copyStyleguideAssets(activeTheme, plConfig);
+		}
 	});
 
 	//Copy styleguide assets form styleguide source to public
@@ -22,7 +24,7 @@ module.exports = function(grunt) {
 
 	function buildPatterns(activeTheme, plConfig) {
 		let pl = require('patternlab-node')(plConfig);
-		
+
 		pl.build(function(){}, true);
 	}
 
@@ -30,7 +32,7 @@ module.exports = function(grunt) {
 	function getPatternConfig(activeTheme) {
 		let mergeDeep = require('../../lib/utils/mergeDeep');
 		let defaultConfig = getDefaultPatternLabConfig(activeTheme);
-		return mergeDeep(defaultConfig, activeTheme.patterns);
+		return mergeDeep(defaultConfig, activeTheme.patterns.plConfig);
 	}
 
 	function getDefaultPatternLabConfig(activeTheme) {
@@ -40,8 +42,8 @@ module.exports = function(grunt) {
 		      "root": "./" + activeTheme.source.basePath + "/",
 		      "patterns" : "./" + activeTheme.source.assetPaths.patterns + "/",
 		      "data" : "./" + activeTheme.source.assetPaths.patternData + "/",
-		      "meta": "./" + activeTheme.source.basePath + "/_meta/",
-		      "annotations" : "./" + activeTheme.source.basePath + "/_annotations/",
+		      "meta": "./" + activeTheme.source.assetPaths.patternMeta + "/",
+		      "annotations" : "./" + activeTheme.source.assetPaths.patternAnnotations + "/",
 		      "styleguide" : "./node_modules/styleguidekit-assets-default/dist/",
 		      "patternlabFiles" : "./node_modules/styleguidekit-mustache-default/views/"
 		    },
@@ -65,8 +67,8 @@ module.exports = function(grunt) {
 		    "m": false,
 		    "l": false,
 		    "full": false,
-		    "random": false,
-		    "disco": false,
+		    "random": true,
+		    "disco": true,
 		    "hay": true,
 		    "mqs": false,
 		    "find": false,

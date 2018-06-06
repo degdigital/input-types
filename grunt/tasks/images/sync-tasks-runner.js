@@ -2,21 +2,12 @@ module.exports = function(grunt, activeTheme, baseTask) {
 
 	function runTasks() {
 
-		configureFiles();
+		const filesConfigurer = require('../../lib/staticAssets/filesConfigurer');
+		const filesConfig = filesConfigurer.configure('images', activeTheme, grunt.config('themes'), baseTask);
 
-		grunt.task.run('sync:images_' + baseTask);
-	}
+		grunt.config('sync.images.files', filesConfig);
 
-	function configureFiles() {
-		var filesToProcess = activeTheme.images.files
-			.filter(function(file){
-				return file.process == 'all' || file.process == baseTask;
-			})
-			.reduce(function(files, file) {
-				return files.concat(file.src);
-			}, []);
-
-		grunt.config('sync.images_' + baseTask + '.files.0.src', filesToProcess);
+		grunt.task.run('sync:images');
 	}
 
 	return {

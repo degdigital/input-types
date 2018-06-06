@@ -8,7 +8,7 @@ module.exports = {
             basePath: ''
         }
     },
-    
+
     /* Default theme configuration */
     themeDefaults: {
 
@@ -25,6 +25,8 @@ module.exports = {
                 images: 'images',
                 js: 'js',
                 patterns: '_patterns',
+                patternAnnotations: '_annotations',
+                patternMeta: '_meta',
                 patternData: '_data'
             }
         },
@@ -41,6 +43,10 @@ module.exports = {
                 patterns: 'patterns'
             },
             assetUrls: {
+                api: '../../api',
+                css: '../../css',
+                fonts: '../../fonts',
+                images: '../../images',
                 js: '../../js'
             }
         },
@@ -57,6 +63,10 @@ module.exports = {
                 patterns: ''
             },
             assetUrls: {
+                api: 'api',
+                css: 'css',
+                fonts: 'fonts',
+                images: 'images',
                 js: 'js'
             }
         },
@@ -67,9 +77,6 @@ module.exports = {
             /* Export CSS source files along with compiled files */
             exportSourceFiles: false,
 
-            /* Enable globbing of CSS files */
-            enableGlobbing: true,
-
             /* CSS files to be processed */
             files: [
                 {
@@ -77,15 +84,7 @@ module.exports = {
                     dest: "global.css",
 
                     /* When to process file [all, build, export] */
-                    process: 'all',
-
-                    /* Files and directories to be included in globbing */
-                    globbingFiles: [
-                        'utilities/**/*.css',
-                        'basics/**/*.css',                  
-                        'components/**/*.css',
-                        'templates/**/*.css'
-                    ]
+                    process: 'all'
                 }
             ],
 
@@ -97,15 +96,17 @@ module.exports = {
 
                 /* PostCSS processor configuration */
                 processors: [
-                    { name: 'postcss-import'},      
+                    { name: 'postcss-easy-import'},
                     { name: 'postcss-mixins' },
                     { name: 'postcss-custom-properties'},
+                    { name: 'postcss-place'},
+                    { name: 'postcss-custom-selectors'},
                     { name: 'postcss-custom-media'},
                     { name: 'postcss-calc'},
                     { name: 'postcss-color-function'},
                     { name: 'postcss-nested'},
-                    { name: 'autoprefixer', options: {browsers: 'last 2 versions'} },
-                    { name: 'csswring'} 
+                    { name: 'autoprefixer' },
+                    { name: 'csswring'}
                 ]
             }
         },
@@ -129,47 +130,63 @@ module.exports = {
             ]
         },
 
-        /* Javascript processing configuration */
+        /* Javascript Configuration */
         js: {
 
-            /* Processor for Javascript [jspm, none] */
-            processor: 'jspm',  
+            /* Enable Javascript Linting [all, build, export] */
+            linter: {
+                enable: ''
+            },
 
-            /* When to minify Javascript [all, build, export] */
-            minify: 'export', 
+            /* Javscript Processor Configuration */
+            processors: [
+                {
 
-            /* Enable module bundling for use with JSPM [true, false] */
-            enableBundling: true,
+                    /* Processor type [jspm, none] */
+                    type: 'jspm',
 
-            /* Module bundle config for JSPM */
-            bundles: {
+                    /* When to minify Javascript [all, build, export] */
+                    minify: 'export',
 
-                /* Name of bundle to exclude from all other bundles */
-                defaultExclude: 'main-bundle',
+                    /* Enable module bundling for use with JSPM [true, false] */
+                    enableBundling: false,
 
-                /* Build self-executing bundles [true, false] */
-                selfExecuting: false,
+                    /* Module bundle config for JSPM */
+                    bundles: {
 
-                /* Array of module bundles config objects */
-                items: [
-                    {
-                        /* Name of entry module for this bundle */
-                        entry: 'main',
+                        /* Name of module to exclude from all other bundles */
+                        defaultExclude: 'main',
 
-                        /* Array of bundles to exclude from this bundle */
-                        exclude: [],
+                        /* Build self-executing bundles [true, false] */
+                        selfExecuting: false,
 
-                        /* Array of polyfills for this bundle */
-                        polyfills: []
+                        /* Array of module bundles config objects */
+                        items: [
+                            {
+                                /* Name of entry module for this bundle */
+                                entry: 'main',
+
+                                /* Array of modules to exclude from this bundle */
+                                exclude: [],
+
+                                /* Array of polyfills for this bundle */
+                                polyfills: []
+                            }
+                        ]
                     }
-                ]
-            }
+                }
+            ]
         },
 
         patterns: {
-            "ishControlsHide": {
-                "s": true
-            }
+            plConfig: {},
+            'export': [
+                {
+                    patternType: 'pages',
+                    patterns: '*',
+                    dest: '' 
+                }
+            ]
         },
 
         /* File watching options */
@@ -186,6 +203,9 @@ module.exports = {
     /* Tasks that run on an export */
     exportTasks: ['patterns', 'css', 'js', 'images', 'fonts', 'api'],
 
-    /* Tasks that runs when a watched file event occurs [build, export] */
-    listenTasks: ['build']
+    /* Tasks that run when a watched file event occurs [build, export] */
+    listenTasks: ['build'],
+
+    /* Tasks that run on a lint */
+    lintTasks: ['js']
 };
