@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Varela+Round');
+
 :root {
 
 	--color-black: #000;
 	--color-white: #fff;
+	--color-gray: #f4f6f7;
+	--color-blue-dark-10: #052f5f;
+	--color-blue-light-10: #005377;
+	--color-green: #06a77d;
+	--color-tan: #d5c67a;
+	--color-orange: #f1a208;
 
 	--color-text: var(--color-black);
 
-	--font-family-primary: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	--font-family-primary: 'Varela Round', sans-serif;
+	--font-family-secondary: 'Montserrat', sans-serif;
 	--base-font-size: 1em;
 
 	--page-width: 80rem;

@@ -27,10 +27,10 @@ class App extends React.Component {
 
 	onAddInputClick() {
 		const {inputItems} = this.state;
-		const nextState = [...inputItems, {
+		const nextState = [{
 			...{id: generateRandomId()},
 			...this.defaultInputItem
-		}];
+		}, ...inputItems];
 		this.setState({
 			inputItems: nextState
 		});

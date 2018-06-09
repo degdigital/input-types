@@ -14,11 +14,14 @@ class Header extends React.Component {
 
     render() {
         return (
-            <header>
-                <h1>Input Type Sandbox</h1>
-                <button onClick={this.props.onAddInput}>Add an Input</button>
-                <button onClick={this.submitAllForms}>Test All Forms</button>
-                <br /><br />
+            <header className="header">
+                <div className="wrapper">
+                    <h1 className="logo">Input Type Sandbox</h1>
+                    <div className="header__buttons">
+                        <button className="button" onClick={this.submitAllForms}>Test All Inputs</button>
+                        <button className="button" onClick={this.props.onAddInput}>Add an Input</button>
+                    </div>
+                </div>
             </header>
         );
     }
