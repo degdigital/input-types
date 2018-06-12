@@ -17,7 +17,6 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.7",
     "react": "npm:react@16.4.0",
-    "react-addons-css-transition-group": "npm:react-addons-css-transition-group@15.6.2",
     "react-dom": "npm:react-dom@16.4.0",
     "react-transition-group": "npm:react-transition-group@2.3.1",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -92,9 +91,6 @@ System.config({
       "base64-js": "npm:base64-js@1.3.0",
       "ieee754": "npm:ieee754@1.1.12"
     },
-    "npm:chain-function@1.0.0": {
-      "assert": "github:jspm/nodelibs-assert@0.1.0"
-    },
     "npm:core-js@1.2.7": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -103,12 +99,6 @@ System.config({
     },
     "npm:core-util-is@1.0.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.1"
-    },
-    "npm:create-react-class@15.6.3": {
-      "fbjs": "npm:fbjs@0.8.16",
-      "loose-envify": "npm:loose-envify@1.3.1",
-      "object-assign": "npm:object-assign@4.1.1",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:domain-browser@1.2.0": {
       "events": "github:jspm/nodelibs-events@0.1.1"
@@ -195,10 +185,6 @@ System.config({
     "npm:punycode@1.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:react-addons-css-transition-group@15.6.2": {
-      "react": "npm:react@15.6.2",
-      "react-transition-group": "npm:react-transition-group@1.2.1"
-    },
     "npm:react-dom@16.4.0": {
       "fbjs": "npm:fbjs@0.8.16",
       "loose-envify": "npm:loose-envify@1.3.1",
@@ -208,16 +194,6 @@ System.config({
       "react": "npm:react@16.4.0",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
-    "npm:react-transition-group@1.2.1": {
-      "chain-function": "npm:chain-function@1.0.0",
-      "dom-helpers": "npm:dom-helpers@3.3.1",
-      "loose-envify": "npm:loose-envify@1.3.1",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "prop-types": "npm:prop-types@15.6.1",
-      "react": "npm:react@16.4.0",
-      "react-dom": "npm:react-dom@16.4.0",
-      "warning": "npm:warning@3.0.0"
-    },
     "npm:react-transition-group@2.3.1": {
       "dom-helpers": "npm:dom-helpers@3.3.1",
       "loose-envify": "npm:loose-envify@1.3.1",
@@ -225,14 +201,6 @@ System.config({
       "prop-types": "npm:prop-types@15.6.1",
       "react": "npm:react@16.4.0",
       "react-dom": "npm:react-dom@16.4.0"
-    },
-    "npm:react@15.6.2": {
-      "create-react-class": "npm:create-react-class@15.6.3",
-      "fbjs": "npm:fbjs@0.8.16",
-      "loose-envify": "npm:loose-envify@1.3.1",
-      "object-assign": "npm:object-assign@4.1.1",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "prop-types": "npm:prop-types@15.6.1"
     },
     "npm:react@16.4.0": {
       "fbjs": "npm:fbjs@0.8.16",
@@ -305,10 +273,6 @@ System.config({
     },
     "npm:vm-browserify@0.0.4": {
       "indexof": "npm:indexof@0.0.1"
-    },
-    "npm:warning@3.0.0": {
-      "loose-envify": "npm:loose-envify@1.3.1",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     }
   }
 });
