@@ -1,1 +1,9 @@
-/* Layout Styles */
+body {
+	background-color: var(--color-blue-light-10);
+}
+
+.wrapper {
+	margin: 0 auto;
+	max-width: 50rem;
+	padding: 0 1rem;
+}
