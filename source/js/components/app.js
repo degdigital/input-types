@@ -27,20 +27,20 @@ class App extends React.Component {
 
 	onAddInputClick() {
 		const {inputItems} = this.state;
-		const nextState = [{
-			...{id: generateRandomId()},
+		const updatedInputItems = [{
+			id: generateRandomId(),
 			...this.defaultInputItem
 		}, ...inputItems];
 		this.setState({
-			inputItems: nextState
+			inputItems: updatedInputItems
 		});
 	}
 
 	onRemoveInput(id) {
 		const {inputItems} = this.state;
-		const nextState = inputItems.filter(inputItem => inputItem.id !== id);
+		const updatedInputItems = inputItems.filter(inputItem => inputItem.id !== id);
 		this.setState({
-			inputItems: nextState
+			inputItems: updatedInputItems
 		});
 	}
 

@@ -19,6 +19,7 @@ System.config({
     "react": "npm:react@16.4.0",
     "react-addons-css-transition-group": "npm:react-addons-css-transition-group@15.6.2",
     "react-dom": "npm:react-dom@16.4.0",
+    "react-transition-group": "npm:react-transition-group@2.3.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -89,7 +90,7 @@ System.config({
     },
     "npm:buffer@5.1.0": {
       "base64-js": "npm:base64-js@1.3.0",
-      "ieee754": "npm:ieee754@1.1.11"
+      "ieee754": "npm:ieee754@1.1.12"
     },
     "npm:chain-function@1.0.0": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
@@ -216,6 +217,14 @@ System.config({
       "react": "npm:react@16.4.0",
       "react-dom": "npm:react-dom@16.4.0",
       "warning": "npm:warning@3.0.0"
+    },
+    "npm:react-transition-group@2.3.1": {
+      "dom-helpers": "npm:dom-helpers@3.3.1",
+      "loose-envify": "npm:loose-envify@1.3.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "prop-types": "npm:prop-types@15.6.1",
+      "react": "npm:react@16.4.0",
+      "react-dom": "npm:react-dom@16.4.0"
     },
     "npm:react@15.6.2": {
       "create-react-class": "npm:create-react-class@15.6.3",

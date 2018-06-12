@@ -1,14 +1,3 @@
-.input-item-appear {
-  opacity: 0;
-  transform: translate(0, -100%);
-}
- 
-.input-item-appear.input-item-appear-active{
-  opacity: 1;
-  transform: translate(0, 0);
-  transition: all 0.75s;
-}
-
 .input-item {
 	background-color: color(var(--color-blue-light-10) shade(10%));
 	color: var(--color-white);

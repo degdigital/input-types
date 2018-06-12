@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransition } from 'react-transition-group';
 import types from '../config/types';
 import patterns from '../config/patterns';
 
@@ -61,57 +61,55 @@ class InputItem extends React.Component {
 		const submitButtonClasses = 'button input-item__submit-button';
 		const requiredClasses = 'input-item__control input-item__control--inline';
 		return (
-			<ReactCSSTransitionGroup transitionName="input-item" transitionAppear={true} transitionAppearTimeout={750} transitionEnter={false} transitionLeave={false}>	
-				<li className="input-item" id={this.props.id}>
-					<form onSubmit={this.onFormSubmit}>
-							<button className="input-item__remove-button" type="button" onClick={() => this.props.onRemoveInput(this.props.id)}>&times;</button>
-							<div className="input-item__display">
-								<span className="input-item__validity-display">{this.state.isValid ? 'Form submitted! No validation errors.' : ''}</span>
+			<li className="input-item" id={this.props.id} style={this.props.style}>
+				<form onSubmit={this.onFormSubmit}>
+						<button className="input-item__remove-button" type="button" onClick={() => this.props.onRemoveInput(this.props.id)}>&times;</button>
+						<div className="input-item__display">
+							<span className="input-item__validity-display">{this.state.isValid ? 'Form submitted! No validation errors.' : ''}</span>
+							<input 
+								className="input-item__display-input"
+								type={this.state.inputType} 
+								pattern={this.state.inputPattern} 
+								required={this.state.isRequired} 
+								onFocus={this.clearValidityMessage} />
+							<pre>&lt;{this.renderInputString()}&gt;</pre>
+							<button className={submitButtonClasses} type="submit">Test This Input</button>
+						</div>
+						<div className="input-item__controls">
+							<div className="input-item__control">
+								<label htmlFor="inputType">Input Type:</label>
+								<select 
+									name="inputType"
+									id="inputType"
+									value={this.state.value} 
+									onChange={this.onInputChange} 
+									onFocus={this.clearValidityMessage}>
+									{types.map(type => <option key={type.value} value={type.value}>{type.name}</option>)}
+								</select>
+							</div>
+							<div className="input-item__control">
+								<label htmlFor="inputPattern">Pattern:</label>
+								<select 
+									name="inputPattern"
+									id="inputPattern"
+									value={this.state.value} 
+									onChange={this.onInputChange} 
+									onFocus={this.clearValidityMessage}>
+									{patterns.map(pattern => <option key={pattern.value} value={pattern.value}>{pattern.name}</option>)}
+								</select>
+							</div>
+							<div className={requiredClasses}>
 								<input 
-									className="input-item__display-input"
-									type={this.state.inputType} 
-									pattern={this.state.inputPattern} 
-									required={this.state.isRequired} 
-									onFocus={this.clearValidityMessage} />
-								<pre>&lt;{this.renderInputString()}&gt;</pre>
-								<button className={submitButtonClasses} type="submit">Test This Input</button>
+									name="isRequired"
+									id="isRequired"
+									type="checkbox" 
+									checked={this.state.isRequired} 
+									onChange={this.onInputChange} 
+									onFocus={this.clearValidityMessage} /> <label htmlFor="isRequired">Required</label>
 							</div>
-							<div className="input-item__controls">
-								<div className="input-item__control">
-									<label htmlFor="inputType">Input Type:</label>
-									<select 
-										name="inputType"
-										id="inputType"
-										value={this.state.value} 
-										onChange={this.onInputChange} 
-										onFocus={this.clearValidityMessage}>
-										{types.map(type => <option key={type.value} value={type.value}>{type.name}</option>)}
-									</select>
-								</div>
-								<div className="input-item__control">
-									<label htmlFor="inputPattern">Pattern:</label>
-									<select 
-										name="inputPattern"
-										id="inputPattern"
-										value={this.state.value} 
-										onChange={this.onInputChange} 
-										onFocus={this.clearValidityMessage}>
-										{patterns.map(pattern => <option key={pattern.value} value={pattern.value}>{pattern.name}</option>)}
-									</select>
-								</div>
-								<div className={requiredClasses}>
-									<input 
-										name="isRequired"
-										id="isRequired"
-										type="checkbox" 
-										checked={this.state.isRequired} 
-										onChange={this.onInputChange} 
-										onFocus={this.clearValidityMessage} /> <label htmlFor="isRequired">Required</label>
-								</div>
-							</div>
-						</form>
-				</li>
-			</ReactCSSTransitionGroup>
+						</div>
+					</form>
+			</li>
 		);
 	}
 
