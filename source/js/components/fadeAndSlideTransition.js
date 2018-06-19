@@ -29,8 +29,6 @@ function FadeAndSlideTransition ({children, duration, in: inProp}) {
         }}>
             {
                 (status) => {
-                    console.log(status);
-                    debugger;
                     if (status === 'exited') {
                         return null
                     }

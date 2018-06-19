@@ -1,25 +1,37 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import InputItem from './inputItem.js';
 import {TransitionGroup} from 'react-transition-group';
 import FadeAndSlideTransition from './fadeAndSlideTransition.js';
 
-function List({children}) {
-  return (
-    <ul className="input-item-grid">
-      {children}
-    </ul>
-  )
-}
+const mapStateToProps = state => {
+	return { inputItems: state.inputItems };
+};
 
-const InputItemGrid = ({items, onRemoveInput}) => (
+const List = ({children}) => {
+	return (
+		<ul className="input-item-grid">
+			{children}
+		</ul>
+	);
+};
+
+const InputItemGrid = ({inputItems}) => (
 	<main className="main">
 		<div className="wrapper">
 			<TransitionGroup component={List}>
 				{
-					items.map(item => {
+					inputItems.map(item => {
 						return (
 							<FadeAndSlideTransition duration={250} key={item.id}>
-								<InputItem key={item.id} id={item.id} value={item.name} inputType={item.inputType} onRemoveInput={onRemoveInput} />
+								<InputItem 
+									key={item.id} 
+									id={item.id} 
+									value={item.name} 
+									inputType={item.inputType} 
+									inputPattern={item.inputPattern}
+									isRequired={item.isRequired}
+									isValid={item.isValid} />
 							</FadeAndSlideTransition>
 						)
 					})
@@ -29,4 +41,4 @@ const InputItemGrid = ({items, onRemoveInput}) => (
 	</main>
 );
 
-export default InputItemGrid;
+export default connect(mapStateToProps)(InputItemGrid);

@@ -62,16 +62,6 @@
     "stream": "github:jspm/nodelibs-stream@^0.1.0",
     "util": "github:jspm/nodelibs-util@^0.1.0"
   },
-  "npm:fbjs@0.8.16": {
-    "core-js": "npm:core-js@^1.0.0",
-    "isomorphic-fetch": "npm:isomorphic-fetch@^2.1.1",
-    "loose-envify": "npm:loose-envify@^1.0.0",
-    "object-assign": "npm:object-assign@^4.1.0",
-    "promise": "npm:promise@^7.1.1",
-    "setimmediate": "npm:setimmediate@^1.0.5",
-    "ua-parser-js": "npm:ua-parser-js@^0.7.9",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
   "npm:js-tokens@3.0.2": {},
   "npm:setimmediate@1.0.5": {
     "process": "github:jspm/nodelibs-process@^0.1.0"
@@ -196,13 +186,6 @@
     "object-assign": "npm:object-assign@^4.1.1",
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
-  "npm:react@16.4.0": {
-    "fbjs": "npm:fbjs@^0.8.16",
-    "loose-envify": "npm:loose-envify@^1.1.0",
-    "object-assign": "npm:object-assign@^4.1.1",
-    "prop-types": "npm:prop-types@^15.6.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
   "npm:dom-helpers@3.3.1": {},
   "npm:react-dom@16.4.0": {
     "fbjs": "npm:fbjs@^0.8.16",
@@ -269,5 +252,46 @@
     "react-dom": "npm:react-dom",
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
-  "npm:ieee754@1.1.12": {}
+  "npm:ieee754@1.1.12": {},
+  "npm:symbol-observable@1.2.0": {},
+  "npm:redux@4.0.0": {
+    "loose-envify": "npm:loose-envify@^1.1.0",
+    "symbol-observable": "npm:symbol-observable@^1.2.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:react-redux@5.0.7": {
+    "hoist-non-react-statics": "npm:hoist-non-react-statics@^2.5.0",
+    "invariant": "npm:invariant@^2.0.0",
+    "lodash": "npm:lodash@^4.17.5",
+    "lodash-es": "npm:lodash-es@^4.17.5",
+    "loose-envify": "npm:loose-envify@^1.1.0",
+    "prop-types": "npm:prop-types@^15.6.0",
+    "react": "npm:react@^16.0.0",
+    "redux": "npm:redux@^4.0.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:invariant@2.2.4": {
+    "loose-envify": "npm:loose-envify@^1.0.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:hoist-non-react-statics@2.5.4": {},
+  "npm:react@16.4.1": {
+    "fbjs": "npm:fbjs@^0.8.16",
+    "loose-envify": "npm:loose-envify@^1.1.0",
+    "object-assign": "npm:object-assign@^4.1.1",
+    "prop-types": "npm:prop-types@^15.6.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:fbjs@0.8.17": {
+    "core-js": "npm:core-js@^1.0.0",
+    "isomorphic-fetch": "npm:isomorphic-fetch@^2.1.1",
+    "loose-envify": "npm:loose-envify@^1.0.0",
+    "object-assign": "npm:object-assign@^4.1.0",
+    "promise": "npm:promise@^7.1.1",
+    "setimmediate": "npm:setimmediate@^1.0.5",
+    "ua-parser-js": "npm:ua-parser-js@^0.7.18",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:lodash-es@4.17.10": {},
+  "npm:lodash@4.17.10": {}
 }
