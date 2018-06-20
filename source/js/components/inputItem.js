@@ -25,7 +25,8 @@ const onInputChange = (e, {id, editInputItem}) => {
 	const value = target.type === 'checkbox' ? target.checked : target.value;
 	editInputItem({
 		id,
-		[name]: value
+		isValid: false,
+		[name]: value,
 	});
 };
 
@@ -73,8 +74,7 @@ const InputItem = (props) => (
 						name="inputType"
 						id="inputType"
 						value={props.inputType} 
-						onChange={(e) => onInputChange(e, props)} 
-						onFocus={() => setValidityMessage(props, false)}>
+						onChange={(e) => onInputChange(e, props)}>
 						{types.map(type => <option key={type.value} value={type.value}>{type.name}</option>)}
 					</select>
 				</div>
@@ -84,8 +84,7 @@ const InputItem = (props) => (
 						name="inputPattern"
 						id="inputPattern"
 						value={props.inputPattern} 
-						onChange={(e) => onInputChange(e, props)}
-						onFocus={() => setValidityMessage(props, false)}>
+						onChange={(e) => onInputChange(e, props)}>
 						{patterns.map(pattern => <option key={pattern.value} value={pattern.value}>{pattern.name}</option>)}
 					</select>
 				</div>
@@ -95,8 +94,7 @@ const InputItem = (props) => (
 						id="isRequired"
 						type="checkbox" 
 						checked={props.isRequired} 
-						onChange={(e) => onInputChange(e, props)}
-						onFocus={() => setValidityMessage(props, false)} /> <label htmlFor="isRequired">Required</label>
+						onChange={(e) => onInputChange(e, props)} /> <label htmlFor="isRequired">Required</label>
 				</div>
 			</div>
 		</form>
