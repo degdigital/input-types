@@ -16,9 +16,11 @@ System.config({
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.7",
-    "react": "npm:react@16.4.0",
+    "react": "npm:react@16.4.1",
     "react-dom": "npm:react-dom@16.4.0",
+    "react-redux": "npm:react-redux@5.0.7",
     "react-transition-group": "npm:react-transition-group@2.3.1",
+    "redux": "npm:redux@4.0.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -107,7 +109,7 @@ System.config({
       "buffer": "github:jspm/nodelibs-buffer@0.1.1",
       "iconv-lite": "npm:iconv-lite@0.4.23"
     },
-    "npm:fbjs@0.8.16": {
+    "npm:fbjs@0.8.17": {
       "core-js": "npm:core-js@1.2.7",
       "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
       "loose-envify": "npm:loose-envify@1.3.1",
@@ -133,6 +135,10 @@ System.config({
     },
     "npm:inherits@2.0.3": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:invariant@2.2.4": {
+      "loose-envify": "npm:loose-envify@1.3.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:isomorphic-fetch@2.2.1": {
       "node-fetch": "npm:node-fetch@1.7.3",
@@ -177,7 +183,7 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
     "npm:prop-types@15.6.1": {
-      "fbjs": "npm:fbjs@0.8.16",
+      "fbjs": "npm:fbjs@0.8.17",
       "loose-envify": "npm:loose-envify@1.3.1",
       "object-assign": "npm:object-assign@4.1.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -186,24 +192,35 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:react-dom@16.4.0": {
-      "fbjs": "npm:fbjs@0.8.16",
+      "fbjs": "npm:fbjs@0.8.17",
       "loose-envify": "npm:loose-envify@1.3.1",
       "object-assign": "npm:object-assign@4.1.1",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "prop-types": "npm:prop-types@15.6.1",
-      "react": "npm:react@16.4.0",
+      "react": "npm:react@16.4.1",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
+    },
+    "npm:react-redux@5.0.7": {
+      "hoist-non-react-statics": "npm:hoist-non-react-statics@2.5.4",
+      "invariant": "npm:invariant@2.2.4",
+      "lodash": "npm:lodash@4.17.10",
+      "lodash-es": "npm:lodash-es@4.17.10",
+      "loose-envify": "npm:loose-envify@1.3.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "prop-types": "npm:prop-types@15.6.1",
+      "react": "npm:react@16.4.1",
+      "redux": "npm:redux@4.0.0"
     },
     "npm:react-transition-group@2.3.1": {
       "dom-helpers": "npm:dom-helpers@3.3.1",
       "loose-envify": "npm:loose-envify@1.3.1",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "prop-types": "npm:prop-types@15.6.1",
-      "react": "npm:react@16.4.0",
+      "react": "npm:react@16.4.1",
       "react-dom": "npm:react-dom@16.4.0"
     },
-    "npm:react@16.4.0": {
-      "fbjs": "npm:fbjs@0.8.16",
+    "npm:react@16.4.1": {
+      "fbjs": "npm:fbjs@0.8.17",
       "loose-envify": "npm:loose-envify@1.3.1",
       "object-assign": "npm:object-assign@4.1.1",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -231,6 +248,11 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "string_decoder": "npm:string_decoder@1.1.1",
       "util-deprecate": "npm:util-deprecate@1.0.2"
+    },
+    "npm:redux@4.0.0": {
+      "loose-envify": "npm:loose-envify@1.3.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "symbol-observable": "npm:symbol-observable@1.2.0"
     },
     "npm:safe-buffer@5.1.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.1"

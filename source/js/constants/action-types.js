@@ -1,0 +1,3 @@
+export const ADD_INPUT_ITEM = 'ADD_INPUT_ITEM';
+export const EDIT_INPUT_ITEM = 'EDIT_INPUT_ITEM';
+export const REMOVE_INPUT_ITEM = 'REMOVE_INPUT_ITEM';

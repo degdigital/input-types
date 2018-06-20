@@ -1,30 +1,27 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {addInputItem} from '../actions/index';
 
-class Header extends React.Component {
+const mapDispatchToProps = dispatch => {
+    return {
+        addInputItem: () => dispatch(addInputItem())
+    };
+};
 
-    constructor(props) {
-        super(props);
-
-        this.submitAllForms = this.submitAllForms.bind(this);
-    }
-
-    submitAllForms() {
-        [...document.querySelectorAll('button[type="submit"]')].forEach(buttonEl => buttonEl.click());
-    }
-
-    render() {
-        return (
-            <header className="header">
-                <div className="wrapper">
-                    <h1 className="logo">Input Type Sandbox</h1>
-                    <div className="header__buttons">
-                        <button className="button" onClick={this.submitAllForms}>Test All Inputs</button>
-                        <button className="button" onClick={this.props.onAddInput}>Add an Input</button>
-                    </div>
-                </div>
-            </header>
-        );
-    }
+const submitAllForms = () => {
+    [...document.querySelectorAll('button[type="submit"]')].forEach(buttonEl => buttonEl.click());
 }
 
-export default Header;
+const Header = ({addInputItem}) => (
+    <header className="header">
+        <div className="wrapper">
+            <h1 className="logo">Input Type Sandbox</h1>
+            <div className="header__buttons">
+                <button className="button" onClick={submitAllForms}>Test All Inputs</button>
+                <button className="button" onClick={addInputItem}>Add an Input</button>
+            </div>
+        </div>
+    </header>
+);
+
+export default connect(null, mapDispatchToProps)(Header);
