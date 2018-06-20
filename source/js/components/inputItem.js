@@ -50,7 +50,11 @@ const renderInputString = (props) => {
 const InputItem = (props) => (
 	<li className="input-item" id={props.id} style={props.style}>
 		<form onSubmit={(e) =>onFormSubmit(e, props)}>
-			<button className="input-item__remove-button" type="button" onClick={() => props.removeInputItem(props.id)}>&times;</button>
+			<button 
+				className="input-item__remove-button" 
+				type="button" 
+				onClick={() => props.removeInputItem(props.id)}>&times;
+			</button>
 			<div className="input-item__display">
 				<span className="input-item__validity-display">{props.isValid === true ? 'Form submitted! No validation errors.' : ''}</span>
 				<input 

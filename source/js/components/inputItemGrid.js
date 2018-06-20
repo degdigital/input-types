@@ -26,12 +26,7 @@ const InputItemGrid = ({inputItems}) => (
 							<FadeAndSlideTransition duration={250} key={item.id}>
 								<InputItem 
 									key={item.id} 
-									id={item.id} 
-									value={item.name} 
-									inputType={item.inputType} 
-									inputPattern={item.inputPattern}
-									isRequired={item.isRequired}
-									isValid={item.isValid} />
+									{...item} />
 							</FadeAndSlideTransition>
 						)
 					})
