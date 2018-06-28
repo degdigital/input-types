@@ -24,6 +24,17 @@
 				margin-right: 0;
 			}
 
+			&.button--add-input {
+				bottom: 1.5rem;
+				border-radius: 50%;
+				font-size: 2rem;
+				height: 4rem;
+				padding: 0;
+				position: fixed;
+				right: 1.5rem;
+				width: 4rem;
+			}
+
 		} 
 
 		h1 {

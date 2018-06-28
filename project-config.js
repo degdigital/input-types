@@ -146,7 +146,7 @@ module.exports = {
                     type: 'jspm',
 
                     /* When to minify Javascript [all, build, export] */
-                    minify: 'export',
+                    minify: 'none',
 
                     /* Enable module bundling for use with JSPM [true, false] */
                     enableBundling: false,

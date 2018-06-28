@@ -5,7 +5,7 @@ import {TransitionGroup} from 'react-transition-group';
 import FadeAndSlideTransition from './fadeAndSlideTransition.js';
 
 const mapStateToProps = state => {
-	return { inputItems: state.inputItems };
+	return {inputItems: state.inputItems};
 };
 
 const List = ({children}) => {

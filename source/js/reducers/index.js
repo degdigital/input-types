@@ -1,4 +1,4 @@
-import {ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM} from '../constants/action-types';
+import {ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE} from '../constants/action-types';
 import {generateRandomId} from 'utils/utils.js';
 
 const defaultInputItem = {
@@ -48,6 +48,18 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				inputItems: state.inputItems.filter(inputItem => inputItem.id !== action.payload.id)
+			}
+		case REQUEST_SAVED_STATE:
+			return {
+				...state,
+				inputItems: [],
+				isFetching: true
+			}
+		case RECEIVE_SAVED_STATE:
+			return {
+				...state,
+				inputItems: action.payload,
+				isFetching: false
 			}
 		default:
 			return state;
