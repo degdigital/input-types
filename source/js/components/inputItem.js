@@ -62,7 +62,8 @@ const InputItem = (props) => (
 					className="input-item__display-input"
 					type={props.inputType} 
 					pattern={props.inputPattern} 
-					required={props.isRequired} 
+					required={props.isRequired}
+					value={props.value}
 					onFocus={() => setValidityMessage(props, false)} />
 				<pre>&lt;{renderInputString(props)}&gt;</pre>
 				<button className={submitButtonClasses} type="submit">Test This Input</button>
