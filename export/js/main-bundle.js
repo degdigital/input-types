@@ -1141,9 +1141,18 @@ System.register('components/header.js', ['npm:babel-runtime@5.8.38/helpers/to-co
                         'div',
                         { className: 'wrapper' },
                         React.createElement(
-                            'h1',
-                            { className: 'logo' },
-                            'Input Type Sandbox'
+                            'div',
+                            { className: 'logo-wrapper' },
+                            React.createElement(
+                                'h1',
+                                { className: 'logo' },
+                                'Input Type Sandbox'
+                            ),
+                            React.createElement(
+                                'p',
+                                { className: 'logo-subhead' },
+                                'Test input types, onscreen keyboards and more!'
+                            )
                         ),
                         React.createElement(
                             'div',

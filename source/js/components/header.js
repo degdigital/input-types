@@ -15,7 +15,10 @@ const submitAllForms = () => {
 const Header = ({isFetching, addInputItem, onSave}) => (
     <header className="header">
         <div className="wrapper">
-            <h1 className="logo">Input Type Sandbox</h1>
+            <div className="logo-wrapper">
+                <h1 className="logo">Input Type Sandbox</h1>
+                <p className="logo-subhead">Test input types, onscreen keyboards and more!</p>
+            </div>
             <div className="header__buttons">
                 <button className="button" onClick={submitAllForms}><span className="icon-test"></span> Test All</button>
                 <button className="button" onClick={addInputItem} disabled={isFetching}><span className="icon-add"></span> Add Input</button>
