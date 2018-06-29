@@ -363,7 +363,9 @@ System.register('reducers/index.js', ['npm:babel-runtime@5.8.38/helpers/extends.
 						return _extends({}, state, {
 							inputItems: [_extends({}, defaultInputItem, {
 								id: generateRandomId()
-							})].concat(_toConsumableArray(state.inputItems))
+							})].concat(_toConsumableArray(state.inputItems)),
+							isFetching: false,
+							isLoading: false
 						});
 					case EDIT_INPUT_ITEM:
 						return _extends({}, state, {

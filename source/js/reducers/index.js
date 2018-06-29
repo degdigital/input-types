@@ -45,7 +45,9 @@ const rootReducer = (state = initialState, action) => {
 						id: generateRandomId()
 					},
 					...state.inputItems
-				]
+				],
+				isFetching: false,
+				isLoading: false
 			};
 		case EDIT_INPUT_ITEM:
 			return {
