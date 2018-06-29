@@ -4,10 +4,18 @@ import {fetchSavedState} from 'actions/index.js';
 import Header from 'components/header.js';
 import InputItemGrid from 'components/inputItemGrid.js';
 import {getUrlSegment} from 'utils/utils.js';
+import {saveState} from '../actions/index';
 
 function mapStateToProps(state) {
 	return state;
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+		fetchSavedState: (savedStateKey) => dispatch(fetchSavedState(savedStateKey)),
+        onSave: (inputItems) => dispatch(saveState(inputItems))
+    };
+};
 
 class App extends Component {
 
@@ -16,20 +24,19 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		const {dispatch} = this.props;
 		const savedStateKey = getUrlSegment();
 		if (savedStateKey) {
-			dispatch(fetchSavedState(savedStateKey));
+			this.props.fetchSavedState(savedStateKey);
 		}
 	}
 
 	render() {
 	    return ([
-	    	<Header key="header" />,
+	    	<Header key="header" onSave={() => this.props.onSave(this.props.inputItems)} isFetching={this.props.isFetching} />,
 			<InputItemGrid key="inputItemGrid" />
 	    ]);
 	}
 
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,0 +1,26 @@
+.save-status {
+    animation: slide-down-with-pause 5s linear;
+    background-color: var(--color-orange);
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    color: var(--color-white);
+    font-size: 0.875rem;
+    left: 50%;
+    padding: 0.25rem 0.75rem;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -100%);
+}
+
+@keyframes slide-down-with-pause {
+
+    5%,
+    95% {
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        transform: translate(-50%, -100%);
+    }
+
+}

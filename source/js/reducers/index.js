@@ -1,4 +1,12 @@
-import {ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE} from '../constants/action-types';
+import {
+	ADD_INPUT_ITEM,
+	EDIT_INPUT_ITEM,
+	REMOVE_INPUT_ITEM,
+	REQUEST_SAVED_STATE,
+	RECEIVE_SAVED_STATE,
+	SAVE_STATE_PENDING,
+	SAVE_STATE_COMPLETE
+} from '../constants/action-types';
 import {generateRandomId} from 'utils/utils.js';
 
 const defaultInputItem = {
@@ -53,13 +61,27 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				inputItems: [],
-				isFetching: true
+				isFetching: true,
+				isLoading: true
 			}
 		case RECEIVE_SAVED_STATE:
 			return {
 				...state,
 				inputItems: action.payload,
-				isFetching: false
+				isFetching: false,
+				isLoading: false
+			}
+		case SAVE_STATE_PENDING:
+			return {
+				...state,
+				isFetching: true,
+				saveSuccessful: false
+			}
+		case SAVE_STATE_COMPLETE:
+			return {
+				...state,
+				isFetching: false,
+				saveSuccessful: true
 			}
 		default:
 			return state;

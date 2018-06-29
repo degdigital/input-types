@@ -311,7 +311,7 @@ System.registerDynamic("npm:redux-logger@3.0.6.js", ["npm:redux-logger@3.0.6/dis
   module.exports = $__require("npm:redux-logger@3.0.6/dist/redux-logger.js");
 });
 System.register('reducers/index.js', ['npm:babel-runtime@5.8.38/helpers/extends.js', 'npm:babel-runtime@5.8.38/helpers/to-consumable-array.js', 'npm:babel-runtime@5.8.38/core-js/object/assign.js', 'constants/action-types.js', 'utils/utils.js'], function (_export) {
-	var _extends, _toConsumableArray, _Object$assign, ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE, generateRandomId, defaultInputItem, initialState, filterEditInputItems, rootReducer;
+	var _extends, _toConsumableArray, _Object$assign, ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE, SAVE_STATE_PENDING, SAVE_STATE_COMPLETE, generateRandomId, defaultInputItem, initialState, filterEditInputItems, rootReducer;
 
 	return {
 		setters: [function (_npmBabelRuntime5838HelpersExtendsJs) {
@@ -326,6 +326,8 @@ System.register('reducers/index.js', ['npm:babel-runtime@5.8.38/helpers/extends.
 			REMOVE_INPUT_ITEM = _constantsActionTypesJs.REMOVE_INPUT_ITEM;
 			REQUEST_SAVED_STATE = _constantsActionTypesJs.REQUEST_SAVED_STATE;
 			RECEIVE_SAVED_STATE = _constantsActionTypesJs.RECEIVE_SAVED_STATE;
+			SAVE_STATE_PENDING = _constantsActionTypesJs.SAVE_STATE_PENDING;
+			SAVE_STATE_COMPLETE = _constantsActionTypesJs.SAVE_STATE_COMPLETE;
 		}, function (_utilsUtilsJs) {
 			generateRandomId = _utilsUtilsJs.generateRandomId;
 		}],
@@ -376,12 +378,24 @@ System.register('reducers/index.js', ['npm:babel-runtime@5.8.38/helpers/extends.
 					case REQUEST_SAVED_STATE:
 						return _extends({}, state, {
 							inputItems: [],
-							isFetching: true
+							isFetching: true,
+							isLoading: true
 						});
 					case RECEIVE_SAVED_STATE:
 						return _extends({}, state, {
 							inputItems: action.payload,
-							isFetching: false
+							isFetching: false,
+							isLoading: false
+						});
+					case SAVE_STATE_PENDING:
+						return _extends({}, state, {
+							isFetching: true,
+							saveSuccessful: false
+						});
+					case SAVE_STATE_COMPLETE:
+						return _extends({}, state, {
+							isFetching: false,
+							saveSuccessful: true
 						});
 					default:
 						return state;
@@ -584,6 +598,21 @@ System.registerDynamic("npm:babel-runtime@5.8.38/helpers/inherits.js", ["npm:bab
     if (superClass) _Object$setPrototypeOf ? _Object$setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   };
   exports.__esModule = true;
+});
+System.registerDynamic('npm:core-js@1.2.7/library/fn/object/define-property.js', ['npm:core-js@1.2.7/library/modules/$.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var $ = $__require('npm:core-js@1.2.7/library/modules/$.js');
+  module.exports = function defineProperty(it, key, desc) {
+    return $.setDesc(it, key, desc);
+  };
+});
+System.registerDynamic("npm:babel-runtime@5.8.38/core-js/object/define-property.js", ["npm:core-js@1.2.7/library/fn/object/define-property.js"], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  module.exports = { "default": $__require("npm:core-js@1.2.7/library/fn/object/define-property.js"), __esModule: true };
 });
 System.registerDynamic("npm:babel-runtime@5.8.38/helpers/create-class.js", ["npm:babel-runtime@5.8.38/core-js/object/define-property.js"], true, function ($__require, exports, module) {
   /* */
@@ -1070,7 +1099,7 @@ System.registerDynamic("npm:babel-runtime@5.8.38/helpers/to-consumable-array.js"
   exports.__esModule = true;
 });
 System.register('components/header.js', ['npm:babel-runtime@5.8.38/helpers/to-consumable-array.js', 'npm:react@16.4.1.js', 'npm:react-redux@5.0.7.js', 'actions/index.js'], function (_export) {
-    var _toConsumableArray, React, connect, _addInputItem, addInputButtonClasses, mapDispatchToProps, submitAllForms, Header;
+    var _toConsumableArray, React, connect, _addInputItem, mapDispatchToProps, submitAllForms, Header;
 
     return {
         setters: [function (_npmBabelRuntime5838HelpersToConsumableArrayJs) {
@@ -1084,8 +1113,6 @@ System.register('components/header.js', ['npm:babel-runtime@5.8.38/helpers/to-co
         }],
         execute: function () {
             'use strict';
-
-            addInputButtonClasses = 'button button--add-input';
 
             mapDispatchToProps = function mapDispatchToProps(dispatch) {
                 return {
@@ -1102,7 +1129,9 @@ System.register('components/header.js', ['npm:babel-runtime@5.8.38/helpers/to-co
             };
 
             Header = function Header(_ref) {
+                var isFetching = _ref.isFetching;
                 var addInputItem = _ref.addInputItem;
+                var onSave = _ref.onSave;
                 return React.createElement(
                     'header',
                     { className: 'header' },
@@ -1120,17 +1149,20 @@ System.register('components/header.js', ['npm:babel-runtime@5.8.38/helpers/to-co
                             React.createElement(
                                 'button',
                                 { className: 'button', onClick: submitAllForms },
-                                'Test All Inputs'
+                                React.createElement('span', { className: 'icon-test' }),
+                                ' Test All'
                             ),
                             React.createElement(
                                 'button',
-                                { className: 'button' },
-                                'Save'
+                                { className: 'button', onClick: addInputItem, disabled: isFetching },
+                                React.createElement('span', { className: 'icon-add' }),
+                                ' Add Input'
                             ),
                             React.createElement(
                                 'button',
-                                { className: addInputButtonClasses, onClick: addInputItem, title: 'Add an Input' },
-                                '+'
+                                { className: 'button', onClick: onSave, disabled: isFetching },
+                                React.createElement('span', { className: 'icon-upload' }),
+                                ' Save'
                             )
                         )
                     )
@@ -1142,43 +1174,6 @@ System.register('components/header.js', ['npm:babel-runtime@5.8.38/helpers/to-co
     };
 });
 
-System.registerDynamic('npm:core-js@1.2.7/library/fn/object/define-property.js', ['npm:core-js@1.2.7/library/modules/$.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var $ = $__require('npm:core-js@1.2.7/library/modules/$.js');
-  module.exports = function defineProperty(it, key, desc) {
-    return $.setDesc(it, key, desc);
-  };
-});
-System.registerDynamic("npm:babel-runtime@5.8.38/core-js/object/define-property.js", ["npm:core-js@1.2.7/library/fn/object/define-property.js"], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  module.exports = { "default": $__require("npm:core-js@1.2.7/library/fn/object/define-property.js"), __esModule: true };
-});
-System.registerDynamic("npm:babel-runtime@5.8.38/helpers/define-property.js", ["npm:babel-runtime@5.8.38/core-js/object/define-property.js"], true, function ($__require, exports, module) {
-  /* */
-  "use strict";
-
-  var global = this || self,
-      GLOBAL = global;
-  var _Object$defineProperty = $__require("npm:babel-runtime@5.8.38/core-js/object/define-property.js")["default"];
-  exports["default"] = function (obj, key, value) {
-    if (key in obj) {
-      _Object$defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-    return obj;
-  };
-  exports.__esModule = true;
-});
 System.registerDynamic('npm:react-redux@5.0.7/lib/components/Provider.js', ['npm:react@16.4.1.js', 'npm:prop-types@15.6.2.js', 'npm:react-redux@5.0.7/lib/utils/PropTypes.js', 'npm:react-redux@5.0.7/lib/utils/warning.js', 'github:jspm/nodelibs-process@0.1.2.js'], true, function ($__require, exports, module) {
   var global = this || self,
       GLOBAL = global;
@@ -2850,192 +2845,6 @@ System.registerDynamic("npm:react-redux@5.0.7.js", ["npm:react-redux@5.0.7/lib/i
       GLOBAL = global;
   module.exports = $__require("npm:react-redux@5.0.7/lib/index.js");
 });
-System.registerDynamic("npm:babel-runtime@5.8.38/helpers/extends.js", ["npm:babel-runtime@5.8.38/core-js/object/assign.js"], true, function ($__require, exports, module) {
-  /* */
-  "use strict";
-
-  var global = this || self,
-      GLOBAL = global;
-  var _Object$assign = $__require("npm:babel-runtime@5.8.38/core-js/object/assign.js")["default"];
-  exports["default"] = _Object$assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  exports.__esModule = true;
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.object-sap.js', ['npm:core-js@1.2.7/library/modules/$.export.js', 'npm:core-js@1.2.7/library/modules/$.core.js', 'npm:core-js@1.2.7/library/modules/$.fails.js'], true, function ($__require, exports, module) {
-    var global = this || self,
-        GLOBAL = global;
-    /* */
-    var $export = $__require('npm:core-js@1.2.7/library/modules/$.export.js'),
-        core = $__require('npm:core-js@1.2.7/library/modules/$.core.js'),
-        fails = $__require('npm:core-js@1.2.7/library/modules/$.fails.js');
-    module.exports = function (KEY, exec) {
-        var fn = (core.Object || {})[KEY] || Object[KEY],
-            exp = {};
-        exp[KEY] = exec(fn);
-        $export($export.S + $export.F * fails(function () {
-            fn(1);
-        }), 'Object', exp);
-    };
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/es6.object.keys.js', ['npm:core-js@1.2.7/library/modules/$.to-object.js', 'npm:core-js@1.2.7/library/modules/$.object-sap.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var toObject = $__require('npm:core-js@1.2.7/library/modules/$.to-object.js');
-  $__require('npm:core-js@1.2.7/library/modules/$.object-sap.js')('keys', function ($keys) {
-    return function keys(it) {
-      return $keys(toObject(it));
-    };
-  });
-});
-System.registerDynamic('npm:core-js@1.2.7/library/fn/object/keys.js', ['npm:core-js@1.2.7/library/modules/es6.object.keys.js', 'npm:core-js@1.2.7/library/modules/$.core.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  $__require('npm:core-js@1.2.7/library/modules/es6.object.keys.js');
-  module.exports = $__require('npm:core-js@1.2.7/library/modules/$.core.js').Object.keys;
-});
-System.registerDynamic("npm:babel-runtime@5.8.38/core-js/object/keys.js", ["npm:core-js@1.2.7/library/fn/object/keys.js"], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  module.exports = { "default": $__require("npm:core-js@1.2.7/library/fn/object/keys.js"), __esModule: true };
-});
-System.register('constants/action-types.js', [], function (_export) {
-  'use strict';
-
-  var ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE;
-  return {
-    setters: [],
-    execute: function () {
-      ADD_INPUT_ITEM = 'ADD_INPUT_ITEM';
-
-      _export('ADD_INPUT_ITEM', ADD_INPUT_ITEM);
-
-      EDIT_INPUT_ITEM = 'EDIT_INPUT_ITEM';
-
-      _export('EDIT_INPUT_ITEM', EDIT_INPUT_ITEM);
-
-      REMOVE_INPUT_ITEM = 'REMOVE_INPUT_ITEM';
-
-      _export('REMOVE_INPUT_ITEM', REMOVE_INPUT_ITEM);
-
-      REQUEST_SAVED_STATE = 'REQUEST_SAVED_STATE';
-
-      _export('REQUEST_SAVED_STATE', REQUEST_SAVED_STATE);
-
-      RECEIVE_SAVED_STATE = 'RECEIVE_SAVED_STATE';
-
-      _export('RECEIVE_SAVED_STATE', RECEIVE_SAVED_STATE);
-    }
-  };
-});
-
-System.register('actions/index.js', ['npm:babel-runtime@5.8.38/helpers/extends.js', 'npm:babel-runtime@5.8.38/core-js/object/keys.js', 'constants/action-types.js'], function (_export) {
-    var _extends, _Object$keys, ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE, formatSavedStateObject, addInputItem, editInputItem, removeInputItem, requestSavedState, receiveSavedState, fetchSavedState, saveSavedStates;
-
-    return {
-        setters: [function (_npmBabelRuntime5838HelpersExtendsJs) {
-            _extends = _npmBabelRuntime5838HelpersExtendsJs['default'];
-        }, function (_npmBabelRuntime5838CoreJsObjectKeysJs) {
-            _Object$keys = _npmBabelRuntime5838CoreJsObjectKeysJs['default'];
-        }, function (_constantsActionTypesJs) {
-            ADD_INPUT_ITEM = _constantsActionTypesJs.ADD_INPUT_ITEM;
-            EDIT_INPUT_ITEM = _constantsActionTypesJs.EDIT_INPUT_ITEM;
-            REMOVE_INPUT_ITEM = _constantsActionTypesJs.REMOVE_INPUT_ITEM;
-            REQUEST_SAVED_STATE = _constantsActionTypesJs.REQUEST_SAVED_STATE;
-            RECEIVE_SAVED_STATE = _constantsActionTypesJs.RECEIVE_SAVED_STATE;
-        }],
-        execute: function () {
-            'use strict';
-
-            formatSavedStateObject = function formatSavedStateObject(savedStateObject) {
-                return _Object$keys(savedStateObject).map(function (key) {
-                    return _extends({}, savedStateObject[key], {
-                        id: key
-                    });
-                });
-            };
-
-            addInputItem = function addInputItem() {
-                return {
-                    type: ADD_INPUT_ITEM
-                };
-            };
-
-            _export('addInputItem', addInputItem);
-
-            editInputItem = function editInputItem(payload) {
-                return {
-                    type: EDIT_INPUT_ITEM,
-                    payload: payload
-                };
-            };
-
-            _export('editInputItem', editInputItem);
-
-            removeInputItem = function removeInputItem(id) {
-                return {
-                    type: REMOVE_INPUT_ITEM,
-                    payload: {
-                        id: id
-                    }
-                };
-            };
-
-            _export('removeInputItem', removeInputItem);
-
-            requestSavedState = function requestSavedState(id) {
-                return {
-                    type: REQUEST_SAVED_STATE,
-                    id: id
-                };
-            };
-
-            _export('requestSavedState', requestSavedState);
-
-            receiveSavedState = function receiveSavedState(payload) {
-                return {
-                    type: RECEIVE_SAVED_STATE,
-                    payload: payload
-                };
-            };
-
-            _export('receiveSavedState', receiveSavedState);
-
-            fetchSavedState = function fetchSavedState(id) {
-                return function (dispatch) {
-                    dispatch(requestSavedState(id));
-                    return fetch('/api/state?key=' + id).then(function (response) {
-                        return response.json();
-                    }).then(function (json) {
-                        if (json) {
-                            dispatch(receiveSavedState(formatSavedStateObject(json)));
-                        } else {
-                            dispatch(addInputItem());
-                        }
-                    });
-                };
-            };
-
-            _export('fetchSavedState', fetchSavedState);
-
-            saveSavedStates = function saveSavedStates() {};
-
-            _export('saveSavedStates', saveSavedStates);
-        }
-    };
-});
-
 System.register('config/types.js', [], function (_export) {
 	'use strict';
 
@@ -3121,13 +2930,13 @@ System.register('config/patterns.js', [], function (_export) {
 	};
 });
 
-System.register('components/inputItem.js', ['npm:babel-runtime@5.8.38/helpers/define-property.js', 'npm:react@16.4.1.js', 'npm:react-redux@5.0.7.js', 'actions/index.js', 'config/types.js', 'config/patterns.js'], function (_export) {
-	var _defineProperty, React, connect, _editInputItem, _removeInputItem, types, patterns, submitButtonClasses, requiredClasses, mapDispatchToProps, onFormSubmit, onInputChange, setValidityMessage, renderInputString, InputItem;
+System.register('components/inputItem.js', ['npm:react@16.4.1.js', 'npm:react-redux@5.0.7.js', 'actions/index.js', 'config/types.js', 'config/patterns.js'], function (_export) {
+	'use strict';
+
+	var React, connect, _editInputItem, _removeInputItem, types, patterns, submitButtonClasses, requiredClasses, mapDispatchToProps, onFormSubmit, onInputChange, setValidityMessage, renderInputString, InputItem;
 
 	return {
-		setters: [function (_npmBabelRuntime5838HelpersDefinePropertyJs) {
-			_defineProperty = _npmBabelRuntime5838HelpersDefinePropertyJs['default'];
-		}, function (_npmReact1641Js) {
+		setters: [function (_npmReact1641Js) {
 			React = _npmReact1641Js['default'];
 		}, function (_npmReactRedux507Js) {
 			connect = _npmReactRedux507Js.connect;
@@ -3140,8 +2949,6 @@ System.register('components/inputItem.js', ['npm:babel-runtime@5.8.38/helpers/de
 			patterns = _configPatternsJs['default'];
 		}],
 		execute: function () {
-			'use strict';
-
 			submitButtonClasses = 'button input-item__submit-button';
 			requiredClasses = 'input-item__control input-item__control--inline';
 
@@ -3168,10 +2975,16 @@ System.register('components/inputItem.js', ['npm:babel-runtime@5.8.38/helpers/de
 				var target = e.target;
 				var name = target.name;
 				var value = target.type === 'checkbox' ? target.checked : target.value;
-				editInputItem(_defineProperty({
+				var editVals = {
 					id: id,
 					isValid: false
-				}, name, value));
+				};
+				if (target.classList.contains('input-item__display-input')) {
+					editVals.value = target.value;
+				} else {
+					editVals[name] = value;
+				}
+				editInputItem(editVals);
 			};
 
 			setValidityMessage = function setValidityMessage(_ref2, isValid) {
@@ -3200,7 +3013,7 @@ System.register('components/inputItem.js', ['npm:babel-runtime@5.8.38/helpers/de
 						{ onSubmit: function (e) {
 								return onFormSubmit(e, props);
 							} },
-						React.createElement(
+						props.itemCount > 1 ? React.createElement(
 							'button',
 							{
 								className: 'input-item__remove-button',
@@ -3209,7 +3022,7 @@ System.register('components/inputItem.js', ['npm:babel-runtime@5.8.38/helpers/de
 									return props.removeInputItem(props.id);
 								} },
 							'×'
-						),
+						) : '',
 						React.createElement(
 							'div',
 							{ className: 'input-item__display' },
@@ -3223,8 +3036,12 @@ System.register('components/inputItem.js', ['npm:babel-runtime@5.8.38/helpers/de
 								type: props.inputType,
 								pattern: props.inputPattern,
 								required: props.isRequired,
+								value: props.value,
 								onFocus: function () {
 									return setValidityMessage(props, false);
+								},
+								onChange: function (e) {
+									return onInputChange(e, props);
 								} }),
 							React.createElement(
 								'pre',
@@ -3322,223 +3139,6 @@ System.register('components/inputItem.js', ['npm:babel-runtime@5.8.38/helpers/de
 	};
 });
 
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.global.js', [], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-  var global = module.exports = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-  if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.a-function.js', [], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  module.exports = function (it) {
-    if (typeof it != 'function') throw TypeError(it + ' is not a function!');
-    return it;
-  };
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.ctx.js', ['npm:core-js@1.2.7/library/modules/$.a-function.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var aFunction = $__require('npm:core-js@1.2.7/library/modules/$.a-function.js');
-  module.exports = function (fn, that, length) {
-    aFunction(fn);
-    if (that === undefined) return fn;
-    switch (length) {
-      case 1:
-        return function (a) {
-          return fn.call(that, a);
-        };
-      case 2:
-        return function (a, b) {
-          return fn.call(that, a, b);
-        };
-      case 3:
-        return function (a, b, c) {
-          return fn.call(that, a, b, c);
-        };
-    }
-    return function () {
-      return fn.apply(that, arguments);
-    };
-  };
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.export.js', ['npm:core-js@1.2.7/library/modules/$.global.js', 'npm:core-js@1.2.7/library/modules/$.core.js', 'npm:core-js@1.2.7/library/modules/$.ctx.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var global = $__require('npm:core-js@1.2.7/library/modules/$.global.js'),
-      core = $__require('npm:core-js@1.2.7/library/modules/$.core.js'),
-      ctx = $__require('npm:core-js@1.2.7/library/modules/$.ctx.js'),
-      PROTOTYPE = 'prototype';
-  var $export = function (type, name, source) {
-    var IS_FORCED = type & $export.F,
-        IS_GLOBAL = type & $export.G,
-        IS_STATIC = type & $export.S,
-        IS_PROTO = type & $export.P,
-        IS_BIND = type & $export.B,
-        IS_WRAP = type & $export.W,
-        exports = IS_GLOBAL ? core : core[name] || (core[name] = {}),
-        target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE],
-        key,
-        own,
-        out;
-    if (IS_GLOBAL) source = name;
-    for (key in source) {
-      own = !IS_FORCED && target && key in target;
-      if (own && key in exports) continue;
-      out = own ? target[key] : source[key];
-      exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key] : IS_BIND && own ? ctx(out, global) : IS_WRAP && target[key] == out ? function (C) {
-        var F = function (param) {
-          return this instanceof C ? new C(param) : C(param);
-        };
-        F[PROTOTYPE] = C[PROTOTYPE];
-        return F;
-      }(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-      if (IS_PROTO) (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
-    }
-  };
-  $export.F = 1;
-  $export.G = 2;
-  $export.S = 4;
-  $export.P = 8;
-  $export.B = 16;
-  $export.W = 32;
-  module.exports = $export;
-});
-System.registerDynamic("npm:core-js@1.2.7/library/modules/$.js", [], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var $Object = Object;
-  module.exports = {
-    create: $Object.create,
-    getProto: $Object.getPrototypeOf,
-    isEnum: {}.propertyIsEnumerable,
-    getDesc: $Object.getOwnPropertyDescriptor,
-    setDesc: $Object.defineProperty,
-    setDescs: $Object.defineProperties,
-    getKeys: $Object.keys,
-    getNames: $Object.getOwnPropertyNames,
-    getSymbols: $Object.getOwnPropertySymbols,
-    each: [].forEach
-  };
-});
-System.registerDynamic("npm:core-js@1.2.7/library/modules/$.defined.js", [], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  // 7.2.1 RequireObjectCoercible(argument)
-  module.exports = function (it) {
-    if (it == undefined) throw TypeError("Can't call method on  " + it);
-    return it;
-  };
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.to-object.js', ['npm:core-js@1.2.7/library/modules/$.defined.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var defined = $__require('npm:core-js@1.2.7/library/modules/$.defined.js');
-  module.exports = function (it) {
-    return Object(defined(it));
-  };
-});
-System.registerDynamic("npm:core-js@1.2.7/library/modules/$.cof.js", [], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var toString = {}.toString;
-
-  module.exports = function (it) {
-    return toString.call(it).slice(8, -1);
-  };
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.iobject.js', ['npm:core-js@1.2.7/library/modules/$.cof.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var cof = $__require('npm:core-js@1.2.7/library/modules/$.cof.js');
-  module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
-    return cof(it) == 'String' ? it.split('') : Object(it);
-  };
-});
-System.registerDynamic("npm:core-js@1.2.7/library/modules/$.fails.js", [], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  module.exports = function (exec) {
-    try {
-      return !!exec();
-    } catch (e) {
-      return true;
-    }
-  };
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.object-assign.js', ['npm:core-js@1.2.7/library/modules/$.js', 'npm:core-js@1.2.7/library/modules/$.to-object.js', 'npm:core-js@1.2.7/library/modules/$.iobject.js', 'npm:core-js@1.2.7/library/modules/$.fails.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var $ = $__require('npm:core-js@1.2.7/library/modules/$.js'),
-      toObject = $__require('npm:core-js@1.2.7/library/modules/$.to-object.js'),
-      IObject = $__require('npm:core-js@1.2.7/library/modules/$.iobject.js');
-  module.exports = $__require('npm:core-js@1.2.7/library/modules/$.fails.js')(function () {
-    var a = Object.assign,
-        A = {},
-        B = {},
-        S = Symbol(),
-        K = 'abcdefghijklmnopqrst';
-    A[S] = 7;
-    K.split('').forEach(function (k) {
-      B[k] = k;
-    });
-    return a({}, A)[S] != 7 || Object.keys(a({}, B)).join('') != K;
-  }) ? function assign(target, source) {
-    var T = toObject(target),
-        $$ = arguments,
-        $$len = $$.length,
-        index = 1,
-        getKeys = $.getKeys,
-        getSymbols = $.getSymbols,
-        isEnum = $.isEnum;
-    while ($$len > index) {
-      var S = IObject($$[index++]),
-          keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S),
-          length = keys.length,
-          j = 0,
-          key;
-      while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
-    }
-    return T;
-  } : Object.assign;
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/es6.object.assign.js', ['npm:core-js@1.2.7/library/modules/$.export.js', 'npm:core-js@1.2.7/library/modules/$.object-assign.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var $export = $__require('npm:core-js@1.2.7/library/modules/$.export.js');
-  $export($export.S + $export.F, 'Object', { assign: $__require('npm:core-js@1.2.7/library/modules/$.object-assign.js') });
-});
-System.registerDynamic('npm:core-js@1.2.7/library/modules/$.core.js', [], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  var core = module.exports = { version: '1.2.6' };
-  if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-});
-System.registerDynamic('npm:core-js@1.2.7/library/fn/object/assign.js', ['npm:core-js@1.2.7/library/modules/es6.object.assign.js', 'npm:core-js@1.2.7/library/modules/$.core.js'], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  $__require('npm:core-js@1.2.7/library/modules/es6.object.assign.js');
-  module.exports = $__require('npm:core-js@1.2.7/library/modules/$.core.js').Object.assign;
-});
-System.registerDynamic("npm:babel-runtime@5.8.38/core-js/object/assign.js", ["npm:core-js@1.2.7/library/fn/object/assign.js"], true, function ($__require, exports, module) {
-  var global = this || self,
-      GLOBAL = global;
-  /* */
-  module.exports = { "default": $__require("npm:core-js@1.2.7/library/fn/object/assign.js"), __esModule: true };
-});
 System.registerDynamic("npm:dom-helpers@3.3.1/class/hasClass.js", [], true, function ($__require, exports, module) {
   /* */
   "use strict";
@@ -21060,7 +20660,11 @@ System.register('components/inputItemGrid.js', ['npm:babel-runtime@5.8.38/helper
 			'use strict';
 
 			mapStateToProps = function mapStateToProps(state) {
-				return { inputItems: state.inputItems };
+				return {
+					inputItems: state.inputItems,
+					isLoading: state.isLoading,
+					saveSuccessful: state.saveSuccessful
+				};
 			};
 
 			List = function List(_ref) {
@@ -21075,21 +20679,36 @@ System.register('components/inputItemGrid.js', ['npm:babel-runtime@5.8.38/helper
 
 			InputItemGrid = function InputItemGrid(_ref2) {
 				var inputItems = _ref2.inputItems;
+				var isLoading = _ref2.isLoading;
+				var saveSuccessful = _ref2.saveSuccessful;
 				return React.createElement(
 					'main',
 					{ className: 'main' },
 					React.createElement(
 						'div',
 						{ className: 'wrapper' },
+						saveSuccessful ? React.createElement(
+							'div',
+							{ className: 'save-status' },
+							'URL updated. Share it with your friends!'
+						) : '',
+						isLoading ? React.createElement(
+							'div',
+							{ className: 'loading' },
+							React.createElement('span', { className: 'icon-spinner' }),
+							'Loading'
+						) : '',
 						React.createElement(
 							TransitionGroup,
 							{ component: List },
-							inputItems.map(function (item) {
+							inputItems.map(function (item, index) {
 								return React.createElement(
 									FadeAndSlideTransition,
 									{ duration: 250, key: item.id },
 									React.createElement(InputItem, _extends({
-										key: item.id
+										key: item.id,
+										index: index,
+										itemCount: inputItems.length
 									}, item))
 								);
 							})
@@ -21129,8 +20748,475 @@ System.register('utils/utils.js', [], function (_export) {
 	};
 });
 
+System.registerDynamic("npm:core-js@1.2.7/library/modules/$.js", [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var $Object = Object;
+  module.exports = {
+    create: $Object.create,
+    getProto: $Object.getPrototypeOf,
+    isEnum: {}.propertyIsEnumerable,
+    getDesc: $Object.getOwnPropertyDescriptor,
+    setDesc: $Object.defineProperty,
+    setDescs: $Object.defineProperties,
+    getKeys: $Object.keys,
+    getNames: $Object.getOwnPropertyNames,
+    getSymbols: $Object.getOwnPropertySymbols,
+    each: [].forEach
+  };
+});
+System.registerDynamic("npm:core-js@1.2.7/library/modules/$.cof.js", [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var toString = {}.toString;
+
+  module.exports = function (it) {
+    return toString.call(it).slice(8, -1);
+  };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.iobject.js', ['npm:core-js@1.2.7/library/modules/$.cof.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var cof = $__require('npm:core-js@1.2.7/library/modules/$.cof.js');
+  module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+    return cof(it) == 'String' ? it.split('') : Object(it);
+  };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.object-assign.js', ['npm:core-js@1.2.7/library/modules/$.js', 'npm:core-js@1.2.7/library/modules/$.to-object.js', 'npm:core-js@1.2.7/library/modules/$.iobject.js', 'npm:core-js@1.2.7/library/modules/$.fails.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var $ = $__require('npm:core-js@1.2.7/library/modules/$.js'),
+      toObject = $__require('npm:core-js@1.2.7/library/modules/$.to-object.js'),
+      IObject = $__require('npm:core-js@1.2.7/library/modules/$.iobject.js');
+  module.exports = $__require('npm:core-js@1.2.7/library/modules/$.fails.js')(function () {
+    var a = Object.assign,
+        A = {},
+        B = {},
+        S = Symbol(),
+        K = 'abcdefghijklmnopqrst';
+    A[S] = 7;
+    K.split('').forEach(function (k) {
+      B[k] = k;
+    });
+    return a({}, A)[S] != 7 || Object.keys(a({}, B)).join('') != K;
+  }) ? function assign(target, source) {
+    var T = toObject(target),
+        $$ = arguments,
+        $$len = $$.length,
+        index = 1,
+        getKeys = $.getKeys,
+        getSymbols = $.getSymbols,
+        isEnum = $.isEnum;
+    while ($$len > index) {
+      var S = IObject($$[index++]),
+          keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S),
+          length = keys.length,
+          j = 0,
+          key;
+      while (length > j) if (isEnum.call(S, key = keys[j++])) T[key] = S[key];
+    }
+    return T;
+  } : Object.assign;
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/es6.object.assign.js', ['npm:core-js@1.2.7/library/modules/$.export.js', 'npm:core-js@1.2.7/library/modules/$.object-assign.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var $export = $__require('npm:core-js@1.2.7/library/modules/$.export.js');
+  $export($export.S + $export.F, 'Object', { assign: $__require('npm:core-js@1.2.7/library/modules/$.object-assign.js') });
+});
+System.registerDynamic('npm:core-js@1.2.7/library/fn/object/assign.js', ['npm:core-js@1.2.7/library/modules/es6.object.assign.js', 'npm:core-js@1.2.7/library/modules/$.core.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  $__require('npm:core-js@1.2.7/library/modules/es6.object.assign.js');
+  module.exports = $__require('npm:core-js@1.2.7/library/modules/$.core.js').Object.assign;
+});
+System.registerDynamic("npm:babel-runtime@5.8.38/core-js/object/assign.js", ["npm:core-js@1.2.7/library/fn/object/assign.js"], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  module.exports = { "default": $__require("npm:core-js@1.2.7/library/fn/object/assign.js"), __esModule: true };
+});
+System.registerDynamic("npm:babel-runtime@5.8.38/helpers/extends.js", ["npm:babel-runtime@5.8.38/core-js/object/assign.js"], true, function ($__require, exports, module) {
+  /* */
+  "use strict";
+
+  var global = this || self,
+      GLOBAL = global;
+  var _Object$assign = $__require("npm:babel-runtime@5.8.38/core-js/object/assign.js")["default"];
+  exports["default"] = _Object$assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  exports.__esModule = true;
+});
+System.registerDynamic("npm:core-js@1.2.7/library/modules/$.defined.js", [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  // 7.2.1 RequireObjectCoercible(argument)
+  module.exports = function (it) {
+    if (it == undefined) throw TypeError("Can't call method on  " + it);
+    return it;
+  };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.to-object.js', ['npm:core-js@1.2.7/library/modules/$.defined.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var defined = $__require('npm:core-js@1.2.7/library/modules/$.defined.js');
+  module.exports = function (it) {
+    return Object(defined(it));
+  };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.global.js', [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+  var global = module.exports = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+  if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.a-function.js', [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  module.exports = function (it) {
+    if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+    return it;
+  };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.ctx.js', ['npm:core-js@1.2.7/library/modules/$.a-function.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var aFunction = $__require('npm:core-js@1.2.7/library/modules/$.a-function.js');
+  module.exports = function (fn, that, length) {
+    aFunction(fn);
+    if (that === undefined) return fn;
+    switch (length) {
+      case 1:
+        return function (a) {
+          return fn.call(that, a);
+        };
+      case 2:
+        return function (a, b) {
+          return fn.call(that, a, b);
+        };
+      case 3:
+        return function (a, b, c) {
+          return fn.call(that, a, b, c);
+        };
+    }
+    return function () {
+      return fn.apply(that, arguments);
+    };
+  };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.export.js', ['npm:core-js@1.2.7/library/modules/$.global.js', 'npm:core-js@1.2.7/library/modules/$.core.js', 'npm:core-js@1.2.7/library/modules/$.ctx.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var global = $__require('npm:core-js@1.2.7/library/modules/$.global.js'),
+      core = $__require('npm:core-js@1.2.7/library/modules/$.core.js'),
+      ctx = $__require('npm:core-js@1.2.7/library/modules/$.ctx.js'),
+      PROTOTYPE = 'prototype';
+  var $export = function (type, name, source) {
+    var IS_FORCED = type & $export.F,
+        IS_GLOBAL = type & $export.G,
+        IS_STATIC = type & $export.S,
+        IS_PROTO = type & $export.P,
+        IS_BIND = type & $export.B,
+        IS_WRAP = type & $export.W,
+        exports = IS_GLOBAL ? core : core[name] || (core[name] = {}),
+        target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE],
+        key,
+        own,
+        out;
+    if (IS_GLOBAL) source = name;
+    for (key in source) {
+      own = !IS_FORCED && target && key in target;
+      if (own && key in exports) continue;
+      out = own ? target[key] : source[key];
+      exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key] : IS_BIND && own ? ctx(out, global) : IS_WRAP && target[key] == out ? function (C) {
+        var F = function (param) {
+          return this instanceof C ? new C(param) : C(param);
+        };
+        F[PROTOTYPE] = C[PROTOTYPE];
+        return F;
+      }(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+      if (IS_PROTO) (exports[PROTOTYPE] || (exports[PROTOTYPE] = {}))[key] = out;
+    }
+  };
+  $export.F = 1;
+  $export.G = 2;
+  $export.S = 4;
+  $export.P = 8;
+  $export.B = 16;
+  $export.W = 32;
+  module.exports = $export;
+});
+System.registerDynamic("npm:core-js@1.2.7/library/modules/$.fails.js", [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  module.exports = function (exec) {
+    try {
+      return !!exec();
+    } catch (e) {
+      return true;
+    }
+  };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.object-sap.js', ['npm:core-js@1.2.7/library/modules/$.export.js', 'npm:core-js@1.2.7/library/modules/$.core.js', 'npm:core-js@1.2.7/library/modules/$.fails.js'], true, function ($__require, exports, module) {
+    var global = this || self,
+        GLOBAL = global;
+    /* */
+    var $export = $__require('npm:core-js@1.2.7/library/modules/$.export.js'),
+        core = $__require('npm:core-js@1.2.7/library/modules/$.core.js'),
+        fails = $__require('npm:core-js@1.2.7/library/modules/$.fails.js');
+    module.exports = function (KEY, exec) {
+        var fn = (core.Object || {})[KEY] || Object[KEY],
+            exp = {};
+        exp[KEY] = exec(fn);
+        $export($export.S + $export.F * fails(function () {
+            fn(1);
+        }), 'Object', exp);
+    };
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/es6.object.keys.js', ['npm:core-js@1.2.7/library/modules/$.to-object.js', 'npm:core-js@1.2.7/library/modules/$.object-sap.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var toObject = $__require('npm:core-js@1.2.7/library/modules/$.to-object.js');
+  $__require('npm:core-js@1.2.7/library/modules/$.object-sap.js')('keys', function ($keys) {
+    return function keys(it) {
+      return $keys(toObject(it));
+    };
+  });
+});
+System.registerDynamic('npm:core-js@1.2.7/library/modules/$.core.js', [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  var core = module.exports = { version: '1.2.6' };
+  if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+});
+System.registerDynamic('npm:core-js@1.2.7/library/fn/object/keys.js', ['npm:core-js@1.2.7/library/modules/es6.object.keys.js', 'npm:core-js@1.2.7/library/modules/$.core.js'], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  $__require('npm:core-js@1.2.7/library/modules/es6.object.keys.js');
+  module.exports = $__require('npm:core-js@1.2.7/library/modules/$.core.js').Object.keys;
+});
+System.registerDynamic("npm:babel-runtime@5.8.38/core-js/object/keys.js", ["npm:core-js@1.2.7/library/fn/object/keys.js"], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  /* */
+  module.exports = { "default": $__require("npm:core-js@1.2.7/library/fn/object/keys.js"), __esModule: true };
+});
+System.register('constants/action-types.js', [], function (_export) {
+  'use strict';
+
+  var ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE, SAVE_STATE_PENDING, SAVE_STATE_COMPLETE;
+  return {
+    setters: [],
+    execute: function () {
+      ADD_INPUT_ITEM = 'ADD_INPUT_ITEM';
+
+      _export('ADD_INPUT_ITEM', ADD_INPUT_ITEM);
+
+      EDIT_INPUT_ITEM = 'EDIT_INPUT_ITEM';
+
+      _export('EDIT_INPUT_ITEM', EDIT_INPUT_ITEM);
+
+      REMOVE_INPUT_ITEM = 'REMOVE_INPUT_ITEM';
+
+      _export('REMOVE_INPUT_ITEM', REMOVE_INPUT_ITEM);
+
+      REQUEST_SAVED_STATE = 'REQUEST_SAVED_STATE';
+
+      _export('REQUEST_SAVED_STATE', REQUEST_SAVED_STATE);
+
+      RECEIVE_SAVED_STATE = 'RECEIVE_SAVED_STATE';
+
+      _export('RECEIVE_SAVED_STATE', RECEIVE_SAVED_STATE);
+
+      SAVE_STATE_PENDING = 'SAVE_STATE_PENDING';
+
+      _export('SAVE_STATE_PENDING', SAVE_STATE_PENDING);
+
+      SAVE_STATE_COMPLETE = 'SAVE_STATE_COMPLETE';
+
+      _export('SAVE_STATE_COMPLETE', SAVE_STATE_COMPLETE);
+    }
+  };
+});
+
+System.register('actions/index.js', ['npm:babel-runtime@5.8.38/helpers/extends.js', 'npm:babel-runtime@5.8.38/core-js/object/keys.js', 'constants/action-types.js'], function (_export) {
+    var _extends, _Object$keys, ADD_INPUT_ITEM, EDIT_INPUT_ITEM, REMOVE_INPUT_ITEM, REQUEST_SAVED_STATE, RECEIVE_SAVED_STATE, SAVE_STATE, SAVE_STATE_PENDING, SAVE_STATE_COMPLETE, endpoint, updateUrl, formatFirebaseObjectForState, formatStateArrayForFirebase, addInputItem, editInputItem, removeInputItem, requestSavedState, receiveSavedState, fetchSavedState, saveState, saveStatePending, saveStateComplete;
+
+    return {
+        setters: [function (_npmBabelRuntime5838HelpersExtendsJs) {
+            _extends = _npmBabelRuntime5838HelpersExtendsJs['default'];
+        }, function (_npmBabelRuntime5838CoreJsObjectKeysJs) {
+            _Object$keys = _npmBabelRuntime5838CoreJsObjectKeysJs['default'];
+        }, function (_constantsActionTypesJs) {
+            ADD_INPUT_ITEM = _constantsActionTypesJs.ADD_INPUT_ITEM;
+            EDIT_INPUT_ITEM = _constantsActionTypesJs.EDIT_INPUT_ITEM;
+            REMOVE_INPUT_ITEM = _constantsActionTypesJs.REMOVE_INPUT_ITEM;
+            REQUEST_SAVED_STATE = _constantsActionTypesJs.REQUEST_SAVED_STATE;
+            RECEIVE_SAVED_STATE = _constantsActionTypesJs.RECEIVE_SAVED_STATE;
+            SAVE_STATE = _constantsActionTypesJs.SAVE_STATE;
+            SAVE_STATE_PENDING = _constantsActionTypesJs.SAVE_STATE_PENDING;
+            SAVE_STATE_COMPLETE = _constantsActionTypesJs.SAVE_STATE_COMPLETE;
+        }],
+        execute: function () {
+            'use strict';
+
+            endpoint = '/api/state';
+
+            updateUrl = function updateUrl(id) {
+                return history.replaceState(null, null, id);
+            };
+
+            formatFirebaseObjectForState = function formatFirebaseObjectForState(savedStateObject) {
+                return _Object$keys(savedStateObject).map(function (key) {
+                    return _extends({}, savedStateObject[key], {
+                        id: key
+                    });
+                });
+            };
+
+            formatStateArrayForFirebase = function formatStateArrayForFirebase(stateArray) {
+                var firebaseObject = {};
+                stateArray.forEach(function (stateObject) {
+                    var stateObjectCopy = _extends({}, stateObject);
+                    var id = stateObject.id;
+                    delete stateObjectCopy.id;
+                    delete stateObjectCopy.isValid;
+                    firebaseObject[id] = stateObjectCopy;
+                });
+                return firebaseObject;
+            };
+
+            addInputItem = function addInputItem() {
+                return {
+                    type: ADD_INPUT_ITEM
+                };
+            };
+
+            _export('addInputItem', addInputItem);
+
+            editInputItem = function editInputItem(payload) {
+                return {
+                    type: EDIT_INPUT_ITEM,
+                    payload: payload
+                };
+            };
+
+            _export('editInputItem', editInputItem);
+
+            removeInputItem = function removeInputItem(id) {
+                return {
+                    type: REMOVE_INPUT_ITEM,
+                    payload: {
+                        id: id
+                    }
+                };
+            };
+
+            _export('removeInputItem', removeInputItem);
+
+            requestSavedState = function requestSavedState(id) {
+                return {
+                    type: REQUEST_SAVED_STATE,
+                    id: id
+                };
+            };
+
+            _export('requestSavedState', requestSavedState);
+
+            receiveSavedState = function receiveSavedState(payload) {
+                return {
+                    type: RECEIVE_SAVED_STATE,
+                    payload: payload
+                };
+            };
+
+            _export('receiveSavedState', receiveSavedState);
+
+            fetchSavedState = function fetchSavedState(id) {
+                return function (dispatch) {
+                    dispatch(requestSavedState(id));
+                    return fetch(endpoint + '?key=' + id).then(function (response) {
+                        return response.json();
+                    }).then(function (json) {
+                        if (json) {
+                            dispatch(receiveSavedState(formatFirebaseObjectForState(json)));
+                        } else {
+                            dispatch(addInputItem());
+                        }
+                    })['catch'](function () {
+                        return dispatch(addInputItem());
+                    });
+                };
+            };
+
+            _export('fetchSavedState', fetchSavedState);
+
+            saveState = function saveState(inputItems) {
+                return function (dispatch) {
+                    dispatch(saveStatePending());
+                    return fetch(endpoint, {
+                        method: 'POST',
+                        body: JSON.stringify(formatStateArrayForFirebase(inputItems))
+                    }).then(function (response) {
+                        return response.json();
+                    }).then(function (json) {
+                        if (json) {
+                            updateUrl(json.id);
+                            dispatch(saveStateComplete(json));
+                        }
+                    })['catch'](function (error) {
+                        return dispatch(saveStateComplete(error));
+                    });
+                };
+            };
+
+            _export('saveState', saveState);
+
+            saveStatePending = function saveStatePending() {
+                return {
+                    type: SAVE_STATE_PENDING
+                };
+            };
+
+            _export('saveStatePending', saveStatePending);
+
+            saveStateComplete = function saveStateComplete(payload) {
+                return {
+                    type: SAVE_STATE_COMPLETE
+                };
+            };
+
+            _export('saveStateComplete', saveStateComplete);
+        }
+    };
+});
+
 System.register('components/app.js', ['npm:babel-runtime@5.8.38/helpers/get.js', 'npm:babel-runtime@5.8.38/helpers/inherits.js', 'npm:babel-runtime@5.8.38/helpers/create-class.js', 'npm:babel-runtime@5.8.38/helpers/class-call-check.js', 'npm:react@16.4.1.js', 'npm:react-redux@5.0.7.js', 'actions/index.js', 'components/header.js', 'components/inputItemGrid.js', 'utils/utils.js'], function (_export) {
-	var _get, _inherits, _createClass, _classCallCheck, React, Component, connect, fetchSavedState, Header, InputItemGrid, getUrlSegment, App;
+	var _get, _inherits, _createClass, _classCallCheck, React, Component, connect, _fetchSavedState, saveState, Header, InputItemGrid, getUrlSegment, mapDispatchToProps, App;
 
 	function mapStateToProps(state) {
 		return state;
@@ -21151,7 +21237,8 @@ System.register('components/app.js', ['npm:babel-runtime@5.8.38/helpers/get.js',
 		}, function (_npmReactRedux507Js) {
 			connect = _npmReactRedux507Js.connect;
 		}, function (_actionsIndexJs) {
-			fetchSavedState = _actionsIndexJs.fetchSavedState;
+			_fetchSavedState = _actionsIndexJs.fetchSavedState;
+			saveState = _actionsIndexJs.saveState;
 		}, function (_componentsHeaderJs) {
 			Header = _componentsHeaderJs['default'];
 		}, function (_componentsInputItemGridJs) {
@@ -21161,6 +21248,17 @@ System.register('components/app.js', ['npm:babel-runtime@5.8.38/helpers/get.js',
 		}],
 		execute: function () {
 			'use strict';
+
+			mapDispatchToProps = function mapDispatchToProps(dispatch) {
+				return {
+					fetchSavedState: function fetchSavedState(savedStateKey) {
+						return dispatch(_fetchSavedState(savedStateKey));
+					},
+					onSave: function onSave(inputItems) {
+						return dispatch(saveState(inputItems));
+					}
+				};
+			};
 
 			App = (function (_Component) {
 				_inherits(App, _Component);
@@ -21174,24 +21272,26 @@ System.register('components/app.js', ['npm:babel-runtime@5.8.38/helpers/get.js',
 				_createClass(App, [{
 					key: 'componentDidMount',
 					value: function componentDidMount() {
-						var dispatch = this.props.dispatch;
-
 						var savedStateKey = getUrlSegment();
 						if (savedStateKey) {
-							dispatch(fetchSavedState(savedStateKey));
+							this.props.fetchSavedState(savedStateKey);
 						}
 					}
 				}, {
 					key: 'render',
 					value: function render() {
-						return [React.createElement(Header, { key: 'header' }), React.createElement(InputItemGrid, { key: 'inputItemGrid' })];
+						var _this = this;
+
+						return [React.createElement(Header, { key: 'header', onSave: function () {
+								return _this.props.onSave(_this.props.inputItems);
+							}, isFetching: this.props.isFetching }), React.createElement(InputItemGrid, { key: 'inputItemGrid' })];
 					}
 				}]);
 
 				return App;
 			})(Component);
 
-			_export('default', connect(mapStateToProps)(App));
+			_export('default', connect(mapStateToProps, mapDispatchToProps)(App));
 		}
 	};
 });

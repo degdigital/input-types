@@ -23,11 +23,16 @@ const onInputChange = (e, {id, editInputItem}) => {
 	const target = e.target;
 	const name = target.name;
 	const value = target.type === 'checkbox' ? target.checked : target.value;
-	editInputItem({
+	const editVals = {
 		id,
-		isValid: false,
-		[name]: value,
-	});
+		isValid: false
+	}
+	if (target.classList.contains('input-item__display-input')) {
+		editVals.value = target.value;
+	} else {
+		editVals[name] = value;
+	}
+	editInputItem(editVals);
 };
 
 const setValidityMessage = ({id, editInputItem}, isValid) => {
@@ -51,11 +56,11 @@ const renderInputString = (props) => {
 const InputItem = (props) => (
 	<li className="input-item" id={props.id} style={props.style}>
 		<form onSubmit={(e) =>onFormSubmit(e, props)}>
-			<button 
+			{props.itemCount > 1 ? (<button 
 				className="input-item__remove-button" 
 				type="button" 
 				onClick={() => props.removeInputItem(props.id)}>&times;
-			</button>
+			</button>) : ''}
 			<div className="input-item__display">
 				<span className="input-item__validity-display">{props.isValid === true ? 'Form submitted! No validation errors.' : ''}</span>
 				<input 
@@ -64,7 +69,8 @@ const InputItem = (props) => (
 					pattern={props.inputPattern} 
 					required={props.isRequired}
 					value={props.value}
-					onFocus={() => setValidityMessage(props, false)} />
+					onFocus={() => setValidityMessage(props, false)}
+					onChange={(e) => onInputChange(e, props)} />
 				<pre>&lt;{renderInputString(props)}&gt;</pre>
 				<button className={submitButtonClasses} type="submit">Test This Input</button>
 			</div>
