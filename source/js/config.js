@@ -170,8 +170,6 @@ System.config({
       "npm:core-js@1.2.7/library/modules/$.to-iobject.js",
       "store/index.js",
       "reducers/index.js",
-      "npm:redux-logger@3.0.6.js",
-      "npm:redux-logger@3.0.6/dist/redux-logger.js",
       "npm:redux-thunk@2.3.0.js",
       "npm:redux-thunk@2.3.0/lib/index.js"
     ]
