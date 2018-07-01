@@ -76,20 +76,20 @@ const InputItem = (props) => (
 			</div>
 			<div className="input-item__controls">
 				<div className="input-item__control">
-					<label htmlFor="inputType">Input Type:</label>
+					<label htmlFor={props.id + '-inputType'}>Input Type:</label>
 					<select 
 						name="inputType"
-						id="inputType"
+						id={props.id + '-inputType'}
 						value={props.inputType} 
 						onChange={(e) => onInputChange(e, props)}>
 						{types.map(type => <option key={type.value} value={type.value}>{type.name}</option>)}
 					</select>
 				</div>
 				<div className="input-item__control">
-					<label htmlFor="inputPattern">Pattern:</label>
+					<label htmlFor={props.id + '-inputPattern'}>Pattern:</label>
 					<select 
 						name="inputPattern"
-						id="inputPattern"
+						id={props.id + '-inputPattern'}
 						value={props.inputPattern} 
 						onChange={(e) => onInputChange(e, props)}>
 						{patterns.map(pattern => <option key={pattern.value} value={pattern.value}>{pattern.name}</option>)}
@@ -98,10 +98,10 @@ const InputItem = (props) => (
 				<div className={requiredClasses}>
 					<input 
 						name="isRequired"
-						id="isRequired"
+						id={props.id + '-isRequired'}
 						type="checkbox" 
 						checked={props.isRequired} 
-						onChange={(e) => onInputChange(e, props)} /> <label htmlFor="isRequired">Required</label>
+						onChange={(e) => onInputChange(e, props)} /> <label htmlFor={props.id + '-isRequired'}>Required</label>
 				</div>
 			</div>
 		</form>
