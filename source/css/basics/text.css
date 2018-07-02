@@ -8,3 +8,7 @@ body {
 p {
 	margin: 0 0 var(--spacing-vertical) 0;
 }
+
+pre {
+	white-space: pre-wrap;
+}

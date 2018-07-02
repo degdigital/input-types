@@ -18,6 +18,12 @@
 	&:active {
 
 	}
+
+	&[disabled] {
+		background-color: color(var(--color-green) tint(50%));
+		cursor: default;
+	}
+
 }
 
 .button--alt {

@@ -18,26 +18,24 @@
 
 		.button {
 			font-size: 0.75rem;
-			margin-right: 1rem;
+			margin-right: 0.25rem;
+			padding-left: 2.125rem;
+			position: relative;
+
+			span {
+				left: 0.625rem;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
 
 			&:last-child {
 				margin-right: 0;
 			}
 
-			&.button--add-input {
-				bottom: 1.5rem;
-				border-radius: 50%;
-				font-size: 2rem;
-				height: 4rem;
-				padding: 0;
-				position: fixed;
-				right: 1.5rem;
-				width: 4rem;
-			}
-
 		} 
 
-		h1 {
+		.logo-wrapper {
 			margin-right: auto;
 		}
 
@@ -56,6 +54,7 @@
 		.wrapper {
 
 			.button {
+				margin-right: 1rem;
 
 				&:first-child {
 					margin-left: 1rem;
@@ -75,10 +74,6 @@
 
 		.wrapper {
 			justify-content: flex-end;
-
-			.logo {
-				font-size: 2rem;
-			}
 
 			.button {
 				font-size: 1rem;

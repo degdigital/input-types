@@ -23,11 +23,16 @@ const onInputChange = (e, {id, editInputItem}) => {
 	const target = e.target;
 	const name = target.name;
 	const value = target.type === 'checkbox' ? target.checked : target.value;
-	editInputItem({
+	const editVals = {
 		id,
-		isValid: false,
-		[name]: value,
-	});
+		isValid: false
+	}
+	if (target.classList.contains('input-item__display-input')) {
+		editVals.value = target.value;
+	} else {
+		editVals[name] = value;
+	}
+	editInputItem(editVals);
 };
 
 const setValidityMessage = ({id, editInputItem}, isValid) => {
@@ -51,38 +56,40 @@ const renderInputString = (props) => {
 const InputItem = (props) => (
 	<li className="input-item" id={props.id} style={props.style}>
 		<form onSubmit={(e) =>onFormSubmit(e, props)}>
-			<button 
+			{props.itemCount > 1 ? (<button 
 				className="input-item__remove-button" 
 				type="button" 
 				onClick={() => props.removeInputItem(props.id)}>&times;
-			</button>
+			</button>) : ''}
 			<div className="input-item__display">
 				<span className="input-item__validity-display">{props.isValid === true ? 'Form submitted! No validation errors.' : ''}</span>
 				<input 
 					className="input-item__display-input"
 					type={props.inputType} 
 					pattern={props.inputPattern} 
-					required={props.isRequired} 
-					onFocus={() => setValidityMessage(props, false)} />
+					required={props.isRequired}
+					value={props.value}
+					onFocus={() => setValidityMessage(props, false)}
+					onChange={(e) => onInputChange(e, props)} />
 				<pre>&lt;{renderInputString(props)}&gt;</pre>
 				<button className={submitButtonClasses} type="submit">Test This Input</button>
 			</div>
 			<div className="input-item__controls">
 				<div className="input-item__control">
-					<label htmlFor="inputType">Input Type:</label>
+					<label htmlFor={props.id + '-inputType'}>Input Type:</label>
 					<select 
 						name="inputType"
-						id="inputType"
+						id={props.id + '-inputType'}
 						value={props.inputType} 
 						onChange={(e) => onInputChange(e, props)}>
 						{types.map(type => <option key={type.value} value={type.value}>{type.name}</option>)}
 					</select>
 				</div>
 				<div className="input-item__control">
-					<label htmlFor="inputPattern">Pattern:</label>
+					<label htmlFor={props.id + '-inputPattern'}>Pattern:</label>
 					<select 
 						name="inputPattern"
-						id="inputPattern"
+						id={props.id + '-inputPattern'}
 						value={props.inputPattern} 
 						onChange={(e) => onInputChange(e, props)}>
 						{patterns.map(pattern => <option key={pattern.value} value={pattern.value}>{pattern.name}</option>)}
@@ -91,10 +98,10 @@ const InputItem = (props) => (
 				<div className={requiredClasses}>
 					<input 
 						name="isRequired"
-						id="isRequired"
+						id={props.id + '-isRequired'}
 						type="checkbox" 
 						checked={props.isRequired} 
-						onChange={(e) => onInputChange(e, props)} /> <label htmlFor="isRequired">Required</label>
+						onChange={(e) => onInputChange(e, props)} /> <label htmlFor={props.id + '-isRequired'}>Required</label>
 				</div>
 			</div>
 		</form>
