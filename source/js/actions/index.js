@@ -20,15 +20,14 @@ const formatFirebaseObjectForState = savedStateObject =>
     }));
 
 const formatStateArrayForFirebase = stateArray => {
-    let firebaseObject = {};
-    stateArray.forEach(stateObject => {
+    return stateArray.reduce((firebaseObject, stateObject) => {
         const stateObjectCopy = {...stateObject};
         const id = stateObject.id;
         delete stateObjectCopy.id;
         delete stateObjectCopy.isValid;
         firebaseObject[id] = stateObjectCopy;
-    });
-    return firebaseObject;
+        return firebaseObject;
+    }, {});
 };
 
 export const addInputItem = () => ({
