@@ -11,22 +11,7 @@ textarea {
 
 }
 
-select {
-	
-    &:focus {
-        font-size: 1rem;
-    }
-
-}
-
-input[type="checkbox"], input[type="radio"] {
-	
-}
-
-textarea {
-	
-}
-
-.field__input {
-	
+select,
+select:focus {
+    font-size: 1rem;
 }
