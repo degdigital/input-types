@@ -69,6 +69,7 @@ const InputItem = (props) => (
 					pattern={props.inputPattern} 
 					required={props.isRequired}
 					value={props.value}
+					placeholder="Enter test content here"
 					onFocus={() => setValidityMessage(props, false)}
 					onChange={(e) => onInputChange(e, props)} />
 				<pre>&lt;{renderInputString(props)}&gt;</pre>
