@@ -6,8 +6,8 @@ import {
 	RECEIVE_SAVED_STATE,
 	SAVE_STATE_PENDING,
 	SAVE_STATE_COMPLETE
-} from '../constants/action-types';
-import {generateRandomId} from 'utils/utils.js';
+} from '../constants/action-types.js';
+import {generateRandomId} from '../utils/utils.js';
 
 const defaultInputItem = {
 	name: 'Input Item',

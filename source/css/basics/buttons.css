@@ -11,7 +11,7 @@
 	transition: background-color 0.25s;
 
 	&:hover {
-		background-color: color(var(--color-green) shade(10%));
+		background-color: color-mod(var(--color-green) shade(10%));
 		cursor: pointer;
 	}
 
@@ -20,7 +20,7 @@
 	}
 
 	&[disabled] {
-		background-color: color(var(--color-green) tint(50%));
+		background-color: color-mod(var(--color-green) tint(50%));
 		cursor: default;
 	}
 

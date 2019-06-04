@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchSavedState} from 'actions/index.js';
-import Header from 'components/header.js';
-import InputItemGrid from 'components/inputItemGrid.js';
-import {getUrlSegment} from 'utils/utils.js';
-import {saveState} from '../actions/index';
+import {fetchSavedState} from '../actions/index.js';
+import Header from '../components/header.js';
+import InputItemGrid from '../components/inputItemGrid.js';
+import {getUrlSegment} from '../utils/utils.js';
+import {saveState} from '../actions/index.js';
 
 function mapStateToProps(state) {
 	return state;

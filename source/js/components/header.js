@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addInputItem} from '../actions/index';
+import {addInputItem} from '../actions/index.js';
 
 const mapDispatchToProps = dispatch => {
     return {

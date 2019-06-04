@@ -1,0 +1,231 @@
+[debug] [2019-06-04T04:02:04.430Z] ----------------------------------------------------------------------
+[debug] [2019-06-04T04:02:04.432Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-06-04T04:02:04.432Z] CLI Version:   6.10.0
+[debug] [2019-06-04T04:02:04.432Z] Platform:      darwin
+[debug] [2019-06-04T04:02:04.432Z] Node Version:  v9.8.0
+[debug] [2019-06-04T04:02:04.433Z] Time:          Mon Jun 03 2019 23:02:04 GMT-0500 (CDT)
+[debug] [2019-06-04T04:02:04.433Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-04T04:02:04.441Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-04T04:02:04.441Z] > authorizing via signed-in user
+[debug] [2019-06-04T04:02:04.442Z] [iam] checking project inputtypes for permissions ["firebase.projects.get"]
+[debug] [2019-06-04T04:02:04.443Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/inputtypes:testIamPermissions  
+
+[debug] [2019-06-04T04:02:04.619Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-04T04:02:04.621Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/inputtypes  
+ 
+[debug] [2019-06-04T04:02:04.733Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/aladage/Projects/_degsideprojects/inputTypes'...
+[info] 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "9"
+[debug] [2019-06-04T04:02:04.743Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/768542246645/clients/_:getWebAppConfig  
+ 
+[debug] [2019-06-04T04:02:04.744Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/768542246645:getServerAppConfig  
+ 
+[debug] [2019-06-04T04:02:04.888Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-06-04T04:02:04.980Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/aladage/Projects/_degsideprojects/inputTypes/functions" for Cloud Functions...
+[info] i  hosting: Serving hosting files from: app
+[info] ✔  hosting: Local server: http://localhost:5000
+[debug] [2019-06-04T04:02:05.222Z] Functions runtime initialized.
+[debug] [2019-06-04T04:02:05.223Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:02:05.681Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[info] i  functions: HTTP trigger initialized at http://localhost:5001/inputtypes/us-central1/state
+[info] [hosting] Rewriting /api/state to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:02:34.197Z] Accepted request POST /inputtypes/us-central1/state/api/state --> state
+[debug] [2019-06-04T04:02:34.430Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:02:34.431Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:02:34.887Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:02:34.895Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:02:34.895Z] 
+[debug] [2019-06-04T04:02:34.895Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:02:34.907Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44658.sock"}
+[debug] [2019-06-04T04:02:34.910Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44658.sock"}
+[debug] [2019-06-04T04:02:34.940Z] Ephemeral server used!
+[debug] [2019-06-04T04:02:35.013Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:02:58.540Z] Accepted request POST /inputtypes/us-central1/state/api/state --> state
+[debug] [2019-06-04T04:02:58.772Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:02:58.773Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:02:59.236Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:02:59.246Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:02:59.246Z] 
+[debug] [2019-06-04T04:02:59.246Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:02:59.253Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44665.sock"}
+[debug] [2019-06-04T04:02:59.253Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44665.sock"}
+[debug] [2019-06-04T04:02:59.279Z] Ephemeral server used!
+[debug] [2019-06-04T04:02:59.331Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:03:02.675Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:03:02.925Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:03:02.926Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:03:03.414Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:03:03.423Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:03:03.423Z] 
+[debug] [2019-06-04T04:03:03.423Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:03:03.429Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44675.sock"}
+[debug] [2019-06-04T04:03:03.430Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44675.sock"}
+[debug] [2019-06-04T04:03:03.450Z] Ephemeral server used!
+[debug] [2019-06-04T04:03:03.500Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:13:01.097Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:13:01.456Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:13:01.457Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:13:02.007Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:13:02.023Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:13:02.023Z] 
+[debug] [2019-06-04T04:13:02.023Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:13:02.030Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44757.sock"}
+[debug] [2019-06-04T04:13:02.031Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44757.sock"}
+[debug] [2019-06-04T04:13:02.052Z] Ephemeral server used!
+[debug] [2019-06-04T04:13:02.120Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:16:52.209Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:16:52.462Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:16:52.463Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:16:52.958Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:16:52.967Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:16:52.967Z] 
+[debug] [2019-06-04T04:16:52.967Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:16:52.974Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44832.sock"}
+[debug] [2019-06-04T04:16:52.974Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44832.sock"}
+[debug] [2019-06-04T04:16:52.995Z] Ephemeral server used!
+[debug] [2019-06-04T04:16:53.043Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:25:21.789Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:25:22.055Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:25:22.056Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:25:22.556Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:25:22.565Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:25:22.565Z] 
+[debug] [2019-06-04T04:25:22.565Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:25:22.571Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44895.sock"}
+[debug] [2019-06-04T04:25:22.571Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44895.sock"}
+[debug] [2019-06-04T04:25:22.590Z] Ephemeral server used!
+[debug] [2019-06-04T04:25:22.639Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:25:24.291Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:25:24.555Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:25:24.556Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:25:25.057Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:25:25.067Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:25:25.067Z] 
+[debug] [2019-06-04T04:25:25.068Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:25:25.074Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44902.sock"}
+[debug] [2019-06-04T04:25:25.074Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44902.sock"}
+[debug] [2019-06-04T04:25:25.092Z] Ephemeral server used!
+[debug] [2019-06-04T04:25:25.143Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:25:40.648Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:25:41.001Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:25:41.003Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:25:41.548Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:25:41.569Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:25:41.569Z] 
+[debug] [2019-06-04T04:25:41.569Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:25:41.579Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44920.sock"}
+[debug] [2019-06-04T04:25:41.580Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44920.sock"}
+[debug] [2019-06-04T04:25:41.600Z] Ephemeral server used!
+[debug] [2019-06-04T04:25:41.665Z] Ephemeral server survived.
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:25:41.697Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:25:41.953Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:25:41.954Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[info] i  functions: Finished "state" in ~1s
+[debug] [2019-06-04T04:25:42.454Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:25:42.462Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:25:42.462Z] 
+[debug] [2019-06-04T04:25:42.462Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:25:42.469Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44927.sock"}
+[debug] [2019-06-04T04:25:42.469Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44927.sock"}
+[debug] [2019-06-04T04:25:42.489Z] Ephemeral server used!
+[debug] [2019-06-04T04:25:42.537Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:25:45.686Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:25:45.938Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:25:45.939Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:25:46.443Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:25:46.452Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:25:46.452Z] 
+[debug] [2019-06-04T04:25:46.452Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:25:46.459Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44934.sock"}
+[debug] [2019-06-04T04:25:46.459Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44934.sock"}
+[debug] [2019-06-04T04:25:46.480Z] Ephemeral server used!
+[debug] [2019-06-04T04:25:46.529Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:27:24.471Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:27:24.728Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:27:24.729Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:27:25.220Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:27:25.229Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:27:25.229Z] 
+[debug] [2019-06-04T04:27:25.229Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:27:25.236Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44976.sock"}
+[debug] [2019-06-04T04:27:25.236Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44976.sock"}
+[debug] [2019-06-04T04:27:25.255Z] Ephemeral server used!
+[debug] [2019-06-04T04:27:25.304Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:27:26.475Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:27:26.725Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:27:26.726Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:27:27.224Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:27:27.233Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:27:27.234Z] 
+[debug] [2019-06-04T04:27:27.234Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:27:27.240Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44983.sock"}
+[debug] [2019-06-04T04:27:27.240Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44983.sock"}
+[debug] [2019-06-04T04:27:27.259Z] Ephemeral server used!
+[debug] [2019-06-04T04:27:27.308Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s
+[info] [hosting] Rewriting /api/state?key=-LgVdsdy5NbcvpWhrmFe to http://localhost:5001/inputtypes/us-central1/state for local Function state
+[debug] [2019-06-04T04:27:49.265Z] Accepted request GET /inputtypes/us-central1/state/api/state?key=-LgVdsdy5NbcvpWhrmFe --> state
+[debug] [2019-06-04T04:27:49.519Z] Functions runtime initialized.
+[info] i  functions: Beginning execution of "state"
+[debug] [2019-06-04T04:27:49.520Z] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"protect_env":true,"admin_stubs":true}
+[debug] [2019-06-04T04:27:50.024Z] firebase-admin has been stubbed.
+[info] i  Your code has been provided a "firebase-admin" instance.
+[debug] [2019-06-04T04:27:50.033Z] Trigger "state" has been found, beginning invocation!
+[debug] [2019-06-04T04:27:50.036Z] 
+[debug] [2019-06-04T04:27:50.036Z] Running state in mode HTTPS
+[debug] [2019-06-04T04:27:50.040Z] {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44995.sock"}
+[debug] [2019-06-04T04:27:50.040Z] [functions] Runtime ready! Sending request! {"socketPath":"/var/folders/l2/4k41m5c94tvd0t5zx1yj3n4wc8k8h6/T/firebase_emulator_invocation_44995.sock"}
+[debug] [2019-06-04T04:27:50.062Z] Ephemeral server used!
+[debug] [2019-06-04T04:27:50.110Z] Ephemeral server survived.
+[info] i  functions: Finished "state" in ~1s

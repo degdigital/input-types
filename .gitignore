@@ -1,6 +1,7 @@
 tmp/
 node_modules
-public
+patternlab/
+app/
 source/js/jspm_packages
 source/js/config.js
 
@@ -17,5 +18,3 @@ source/js/config.js
 Thumbs.db
 .DS_Store
 ~$*
-
-*.sublime-project

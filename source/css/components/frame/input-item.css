@@ -1,5 +1,5 @@
 .input-item {
-	background-color: color(var(--color-blue-light-10) shade(10%));
+	background-color: color-mod(var(--color-blue-light-10) shade(10%));
 	color: var(--color-white);
 	list-style: none;
 	margin-bottom: 2rem;
@@ -27,7 +27,7 @@
 		width: 100%;
 
 		pre {
-			color: color(var(--color-gray) shade(30%));
+			color: color-mod(var(--color-gray) shade(30%));
 			font-style: italic;
 			margin-bottom: 1rem;
 		}

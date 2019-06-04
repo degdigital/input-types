@@ -24,8 +24,12 @@ export default [
 		value: 'search'
 	},
 	{
-		name: 'Datetime',
+		name: 'Datetime (Deprecated)',
 		value: 'datetime'
+	},
+	{
+		name: 'Datetime-local',
+		value: 'datetime-local'
 	},
 	{
 		name: 'Date',

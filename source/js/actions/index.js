@@ -7,7 +7,7 @@ import {
     SAVE_STATE,
     SAVE_STATE_PENDING,
     SAVE_STATE_COMPLETE
-} from '../constants/action-types';
+} from '../constants/action-types.js';
 
 const endpoint = '/api/state';
 

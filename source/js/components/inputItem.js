@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {editInputItem, removeInputItem} from '../actions/index';
-import types from '../config/types';
-import patterns from '../config/patterns';
+import {editInputItem, removeInputItem} from '../actions/index.js';
+import types from '../config/types.js';
+import patterns from '../config/patterns.js';
+import modes from '../config/modes.js';
 
 const submitButtonClasses = 'button input-item__submit-button';
 const requiredClasses = 'input-item__control input-item__control--inline';
@@ -50,7 +51,10 @@ const renderInputString = (props) => {
 	const requiredStr = props.isRequired ?
 		` required` :
 		'';
-	return `input${typeStr}${patternStr}${requiredStr}`;
+	const modeStr = props.inputMode ? 
+		` inputmode="${props.inputMode}"` :
+		'';
+	return `input${typeStr}${patternStr}${requiredStr}${modeStr}`;
 };
 
 const InputItem = (props) => (
@@ -67,6 +71,7 @@ const InputItem = (props) => (
 					className="input-item__display-input"
 					type={props.inputType} 
 					pattern={props.inputPattern} 
+					inputMode={props.inputMode}
 					required={props.isRequired}
 					value={props.value}
 					placeholder="Enter test content here"
@@ -85,7 +90,7 @@ const InputItem = (props) => (
 						onChange={(e) => onInputChange(e, props)}>
 						{types.map(type => <option key={type.value} value={type.value}>{type.name}</option>)}
 					</select>
-				</div>
+        		</div>
 				<div className="input-item__control">
 					<label htmlFor={props.id + '-inputPattern'}>Pattern:</label>
 					<select 
@@ -94,6 +99,16 @@ const InputItem = (props) => (
 						value={props.inputPattern} 
 						onChange={(e) => onInputChange(e, props)}>
 						{patterns.map(pattern => <option key={pattern.value} value={pattern.value}>{pattern.name}</option>)}
+					</select>
+				</div>
+        		<div className="input-item__control">
+					<label htmlFor={props.id + '-inputMode'}>Input Mode:</label>
+					<select 
+						name="inputMode"
+						id={props.id + '-inputMode'}
+						value={props.inputMode} 
+						onChange={(e) => onInputChange(e, props)}>
+						{modes.map(mode => <option key={mode.value} value={mode.value}>{mode.name}</option>)}
 					</select>
 				</div>
 				<div className={requiredClasses}>

@@ -1,0 +1,28 @@
+{
+  "name": "Input Types",
+  "short_name": "Input Types",
+  "theme_color": "#005377",
+  "background_color": "#005377",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "Scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "images/apple-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "images/apple-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "images/apple-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": null
+}
